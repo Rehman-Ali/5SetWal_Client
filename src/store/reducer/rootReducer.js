@@ -1,9 +1,12 @@
+import { ABC } from "../actions/type";
+
+
 const initialState = {
   data: [],
 };
 export const Reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "name":
+    case ABC:
       return {
         ...state,
       };
