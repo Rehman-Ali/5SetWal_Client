@@ -10,9 +10,9 @@ const DashboardInfo = () => {
           <p>Total Users</p>
           </div>
           <div className='icon'>
-          <i class="fa-solid fa-user-plus"></i>
+          <i className="fa-solid fa-user-plus"></i>
           </div>
-          <a href="#" className='aw_small_footer_box'>More Info  <i class="fa-sharp fa-solid fa-circle-right"></i></a>
+          <a href="#" className='aw_small_footer_box'>More Info  <i className="fa-sharp fa-solid fa-circle-right"></i></a>
         </div>
         
     </div>
@@ -23,9 +23,9 @@ const DashboardInfo = () => {
           <p className='aw_users'>Total Post</p>
           </div>
           <div className='icon'>
-          <i class="fa-regular fa-image"></i>
+          <i className="fa-regular fa-image"></i>
           </div>
-          <a href="#" className='aw_small_footer_box aw_white_te'>More Info  <i class="fa-sharp fa-solid fa-circle-right"></i></a>
+          <a href="#" className='aw_small_footer_box aw_white_te'>More Info  <i className="fa-sharp fa-solid fa-circle-right"></i></a>
         </div>
         
     </div>
@@ -36,9 +36,9 @@ const DashboardInfo = () => {
           <p className='aw_users'>Inactive Users</p>
           </div>
           <div className='icon'>
-          <i class="fa-solid fa-user"></i>
+          <i className="fa-solid fa-user"></i>
           </div>
-          <a href="#" className='aw_small_footer_box aw_white_te'>More Info  <i class="fa-sharp fa-solid fa-circle-right"></i></a>
+          <a href="#" className='aw_small_footer_box aw_white_te'>More Info  <i className="fa-sharp fa-solid fa-circle-right"></i></a>
         </div>
         
     </div>
@@ -49,9 +49,9 @@ const DashboardInfo = () => {
           <p className='aw_users'>Active Users</p>
           </div>
           <div className='icon'>
-          <i class="fa-solid fa-user"></i>
+          <i className="fa-solid fa-user"></i>
           </div>
-          <a href="#" className='aw_small_footer_box aw_white_te'>More Info  <i class="fa-sharp fa-solid fa-circle-right"></i></a>
+          <a href="#" className='aw_small_footer_box aw_white_te'>More Info  <i className="fa-sharp fa-solid fa-circle-right"></i></a>
         </div>
         
     </div>

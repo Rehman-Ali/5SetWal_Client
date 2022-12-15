@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <main className="main">
-        <Sidebar />
+        {/* <Sidebar /> */}
         <Routing />
       </main>
     </div>
