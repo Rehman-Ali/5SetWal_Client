@@ -1,0 +1,14 @@
+.gr--main-con--wrapper {
+  width: 100%;
+  max-width: calc(100% - 250px);
+  float: right;
+}
+.content--wrapper {
+  min-height: calc(100vh - calc(3.5rem + 1px) - calc(3.5rem + 1px));
+}
+@media screen and (max-width: 1200px) {
+  .gr--main-con--wrapper {
+    /* max-width: calc(100% - 250px); */
+    max-width: 100%;
+  }
+}

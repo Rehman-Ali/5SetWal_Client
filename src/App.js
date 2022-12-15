@@ -6,11 +6,18 @@ import Sidebar from "./layouts/sidebar/Sidebar";
 function App() {
   return (
     <div className="App">
-      <main className="main">
-        <Sidebar />
-        <Routing />
+      <Sidebar />
+      <main className="gr--main-con--wrapper">
+        <Header />
+        <div className="content--wrapper">
+          <Routing />
+        </div>
+        <Footer />
       </main>
     </div>
+
+    // admin@gmail.com
+    // admin@123
   );
 }
 

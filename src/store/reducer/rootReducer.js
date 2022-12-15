@@ -1,14 +1,15 @@
-import { ABC } from "../actions/type";
-
+import { TOGGLESIDEBAR } from "../actions/type";
 
 const initialState = {
-  data: [],
+  ToggleSidebar: false,
 };
 export const Reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ABC:
+    case TOGGLESIDEBAR:
+      console.log("toggle");
       return {
         ...state,
+        ToggleSidebar: !state.ToggleSidebar,
       };
     default:
       return state;

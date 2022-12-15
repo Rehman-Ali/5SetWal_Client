@@ -1,1 +1,1 @@
-export const ABC = "ABC";
+export const TOGGLESIDEBAR = "TOGGLESIDEBAR";
