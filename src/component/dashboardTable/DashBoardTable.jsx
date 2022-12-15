@@ -1,13 +1,23 @@
 import React from "react";
 import "./DashBoardTable.css";
-import MaterialTable from 'material-table'
+import MaterialTable from "material-table";
 import { useState } from "react";
 const DashBoardTable = () => {
-    const [columns,setColumns]=useState([
-        {
-            
-    }
-])
+  const [columns, setColumns] = useState([
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+    },
+  ]);
+  const [data, setData] = useState([
+    {
+      key: "1",
+      name: "Mike",
+      age: 32,
+      address: "10 Downing Street",
+    },
+  ]);
   return (
     <>
       <div className="col-lg-12">
@@ -43,18 +53,13 @@ const DashBoardTable = () => {
               </div>
             </div>
             <div className="row">
-                <div className="col-lg-12 col-md-12 col-sm-12">
+              <div className="col-lg-12 col-md-12 col-sm-12">
                 <MaterialTable
-          columns={[
-            { title: 'Adı', field: 'name' },
-            { title: 'Soyadı', field: 'surname' },
-            { title: 'Doğum Yılı', field: 'birthYear', type: 'numeric' },
-            { title: 'Doğum Yeri', field: 'birthCity', lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' } }
-          ]}
-          data={[{ name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 }]}
-          title="Demo Title"
-        />
-                </div>
+                  columns={columns}
+                  data={data}
+                  title="Demo Title"
+                />
+              </div>
             </div>
           </div>
         </div>
