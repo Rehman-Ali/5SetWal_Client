@@ -50,18 +50,18 @@ const DashBoardTable = () => {
     },
     { title: "Name", field: "title" },
     {
-      title: "Product_Image",
-      field: "gallary_name",
+      title: "Email",
+      field: "email",
     },
     {
-      title: "Category",
-      field: "category_name",
+      title: "Followers",
+      field: "followers",
     },
-    { title: "Price", field: "price" },
-    { title: "Discount_Price", field: "product_discount_price" },
+    { title: "Posts", field: "Posts" },
+    { title: "Status", field: "status" },
     {
-      title: "Status",
-      field: "product_status",
+      title: "Action",
+      field: "action",
     },
   ];
 
@@ -69,21 +69,102 @@ const DashBoardTable = () => {
     {
       id: 1,
       title: "test",
-      gallary_name: "gallary_name",
-      category_name: "category_name",
-      price: "price",
-      product_discount_price: "product_discount_price",
-      product_status: "product_status",
+      email: "gallary_name",
+      followers: "category_name",
+      Posts: "price",
+      status: "product_discount_price",
+      action: "product_status",
     },
+    {
+        id: 2,
+        title: "Ghulam Rasool",
+        email: "gh@gmail.com",
+        followers: "gr",
+        Posts: "2",
+        status: "Active",
+        action: "Actions", 
+    },
+    {
+        id: 3,
+        title: "Shoaib",
+        email: "shabi@gmail.com",
+        followers: "shaoiab",
+        Posts: "3",
+        status: "In-Active",
+        action: "Actions", 
+    },
+    {
+        id: 4,
+        title: "Rehman",
+        email: "rehman@gmail.com",
+        followers: "rehman",
+        Posts: "4",
+        status: "Active",
+        action: "Actions", 
+    },
+    {
+        id: 5,
+        title: "Awais",
+        email: "awais@gmail.com",
+        followers: "awais",
+        Posts: "5",
+        status: "In-Active",
+        action: "Actions", 
+    },
+    {
+        id: 6,
+        title: "Sheraz ",
+        email: "sheraz@gmail.com",
+        followers: "sheraz",
+        Posts: "6",
+        status: "Active",
+        action: "Actions",  
+    },
+    {
+        id: 7,
+        title: "Talha ",
+        email: "talha@gmail.com",
+        followers: "talha",
+        Posts: "7",
+        status: "Active",
+        action: "Actions",  
+    },
+    {
+        id: 7,
+        title: "Ali ",
+        email: "ali@gmail.com",
+        followers: "ali",
+        Posts: "8",
+        status: "Active",
+        action: "Actions",  
+    },
+    {
+        id: 8,
+        title: "Ashfaq Waheed ",
+        email: "ashfaq@gmail.com",
+        followers: "Suljay ghar da mast",
+        Posts: "9",
+        status: "Active",
+        action: "Actions",   
+    },
+    {
+        id: 9,
+        title: "Shahzad ",
+        email: "shahzad@gmail.com",
+        followers: "Bechara",
+        Posts: "10",
+        status: "InActive",
+        action: "Actions",  
+    }
   ]);
 
   return (
     <>
       <div className="col-lg-12">
         <div className="aw_table_wrapper">
-          <div className="table_userrs">
+          {/* <div className="table_userrs">
             <h3>Latest Users</h3>
-          </div>
+          </div> */}
           <div className="table_body">
             {/* <div className="row">
               <div className="col-lg-6 col-md-6 col-sm-12">
@@ -117,7 +198,7 @@ const DashBoardTable = () => {
                   <MaterialTable
                     tableRef={tableRef}
                     icons={tableIcons}
-                    title=""
+                    title="Latest User "
                     columns={columns}
                     data={entries}
                     options={{
