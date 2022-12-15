@@ -42,11 +42,14 @@ nav .gr--nav-sidebar li {
 .gr--main--sidebar .nav--sidebar--item {
   margin-bottom: 0.2rem;
 }
-/* 
+
 .nav--sidebar--item a {
   color: #c2c7d0;
   padding: 0.5rem 1rem;
-  display: block;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin: 0 8px;
 }
 .nav--sidebar--item a i {
   margin-left: 0.05rem;
@@ -60,4 +63,13 @@ nav .gr--nav-sidebar li {
   font-size: 1rem;
   text-transform: capitalize;
   line-height: 1.5;
-} */
+}
+
+.nav--sidebar--item a.link.active {
+  background-color: #d81b60;
+  color: #fff;
+  border-radius: 0.25rem;
+}
+.nav--sidebar--item a.link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}

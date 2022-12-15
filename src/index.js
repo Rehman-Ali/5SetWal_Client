@@ -11,7 +11,7 @@ import "primeicons/primeicons.css";
 import { BrowserRouter } from "react-router-dom";
 // redux set up
 import { Provider } from "react-redux";
-import { store } from "./context/store/store";
+import { store } from "./store/store/store";
 
 // ReactToastify
 import "react-toastify/dist/ReactToastify.css";
