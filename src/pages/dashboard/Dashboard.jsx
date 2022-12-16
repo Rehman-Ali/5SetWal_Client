@@ -4,7 +4,7 @@ import BreadCrum from "../../component/breadcrum/BreadCrum";
 import DashBoardChart from "../../component/dashboardChart/DashBoardChart";
 import DashboardInfo from "../../component/dashboardInfo/DashboardInfo";
 import DashBoardTable from "../../component/dashboardTable/DashBoardTable";
-import './Dashboard.css'
+import "./Dashboard.css";
 const Dashboard = () => {
   return (
     <>
@@ -17,13 +17,13 @@ const Dashboard = () => {
            />
           </div>
           <div className="row">
-                <DashboardInfo/>
+            <DashboardInfo />
           </div>
           <div className="row">
-            <DashBoardChart/>
+            <DashBoardChart />
           </div>
           <div className="row">
-          <DashBoardTable/>
+            <DashBoardTable />
           </div>
         </div>
       </section>

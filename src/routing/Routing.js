@@ -11,7 +11,7 @@ import Comments from "../component/comments/Comments";
 const Routing = () => {
   return (
     <Routes>
-      <Route path="/" element={<h1>this is home page</h1>} />
+      <Route path="/" element={<Login />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/users" element={<User/>} />
       <Route path="/posts" element={<Posts/>} />
