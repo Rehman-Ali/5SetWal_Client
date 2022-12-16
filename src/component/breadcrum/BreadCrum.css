@@ -1,10 +1,4 @@
-.aw_dashboard{
-    padding:0px 0.5rem;
-}
-.aw_dash_top{
-    padding: 15px 0;
-}
-/* .aw_dashboard_heading h2{
+.aw_dashboard_heading h2{
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 29px;
     line-height: 35px;
@@ -24,6 +18,9 @@
 }
 .breadcrumb{
     justify-content: end;
-} */
-
-
+}
+@media only  screen and (max-width:550px) {
+    .breadcrumb{
+        justify-content: flex-start !important;
+    }
+}

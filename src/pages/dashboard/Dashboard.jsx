@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import BreadCrum from "../../component/breadcrum/BreadCrum";
 import DashBoardChart from "../../component/dashboardChart/DashBoardChart";
 import DashboardInfo from "../../component/dashboardInfo/DashboardInfo";
 import DashBoardTable from "../../component/dashboardTable/DashBoardTable";
@@ -10,23 +11,10 @@ const Dashboard = () => {
       <section className="aw_dashboard">
         <div className="container-fluid">
           <div className="row aw_dash_top">
-            <div className="col-lg-6 col-md-6 col-sm-6">
-              <div className="aw_dashboard_heading">
-                <h2>Dashboard</h2>
-              </div>
-            </div>
-            <div className="col-lg-6 col-md-6 col-sm-6 ">
-              <nav aria-label="breadcrumb">
-                <ol className="breadcrumb m-0">
-                  <li className="breadcrumb-item">
-                    <Link href="#">Home</Link>
-                  </li>
-                  <li className="breadcrumb-item active" aria-current="page">
-                    Dashboard
-                  </li>
-                </ol>
-              </nav>
-            </div>
+           <BreadCrum 
+           pageName="Dashboard"
+           currentPage="dashboard"
+           />
           </div>
           <div className="row">
             <DashboardInfo />
