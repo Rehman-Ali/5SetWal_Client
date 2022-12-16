@@ -12,3 +12,36 @@
     max-width: 100%;
   }
 }
+@media screen and (max-width: 500px) {
+  .MuiPaper-root h6{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .MuiTablePagination-toolbar{
+    display: inline !important;
+   
+  }
+  /* .MuiTablePagination-select {
+    text-align: center !important;
+   text-align-last: center !important;
+}
+.MuiTablePagination-selectRoot{
+  display: flex !important;
+}
+.MuiSelect-select.MuiSelect-select{
+  padding:0px !important;
+} */
+/* .MuiInputBase-root{
+  position: absolute;
+  left: 100px !important;
+} */
+}
+/* @media screen and (max-width: 376px) {
+  .MuiInputBase-root{
+
+    left: 72px !important;
+  }
+} */
+

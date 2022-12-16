@@ -1,5 +1,5 @@
 import React, { useRef, forwardRef } from "react";
-import './UserTable.css'
+import './RecyclePostTable.css';
 import MaterialTable from "material-table";
 import { useState } from "react";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
@@ -39,8 +39,7 @@ const tableIcons = {
     SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
   };
-
-const UserTable = () => {
+const RecyclePostTable = () => {
     const tableRef = useRef(null);
     const defaultMaterialTheme = createTheme();
     const columns = [
@@ -54,10 +53,11 @@ const UserTable = () => {
         field: "email",
       },
       {
-        title: "Followers",
-        field: "followers",
+        title: "Image",
+        field: "image",
       },
-      { title: "Posts", field: "Posts" },
+      { title: "Content", field: "Content" },
+      { title: "Created At", field: "created" },
       { title: "Status", field: "status" },
       {
         title: "Action",
@@ -75,90 +75,19 @@ const UserTable = () => {
         status: "product_discount_price",
         action: "product_status",
       },
-      {
-          id: 2,
-          title: "Ghulam Rasool",
-          email: "gh@gmail.com",
-          followers: "gr",
-          Posts: "2",
-          status: "Active",
-          action: "Actions", 
-      },
-      {
-          id: 3,
-          title: "Shoaib",
-          email: "shabi@gmail.com",
-          followers: "shaoiab",
-          Posts: "3",
-          status: "In-Active",
-          action: "Actions", 
-      },
-      {
-          id: 4,
-          title: "Rehman",
-          email: "rehman@gmail.com",
-          followers: "rehman",
-          Posts: "4",
-          status: "Active",
-          action: "Actions", 
-      },
-      {
-          id: 5,
-          title: "Awais",
-          email: "awais@gmail.com",
-          followers: "awais",
-          Posts: "5",
-          status: "In-Active",
-          action: "Actions", 
-      },
-      {
-          id: 6,
-          title: "Sheraz ",
-          email: "sheraz@gmail.com",
-          followers: "sheraz",
-          Posts: "6",
-          status: "Active",
-          action: "Actions",  
-      },
-      {
-          id: 7,
-          title: "Talha ",
-          email: "talha@gmail.com",
-          followers: "talha",
-          Posts: "7",
-          status: "Active",
-          action: "Actions",  
-      },
-      {
-          id: 7,
-          title: "Ali ",
-          email: "ali@gmail.com",
-          followers: "ali",
-          Posts: "8",
-          status: "Active",
-          action: "Actions",  
-      },
-      {
-          id: 8,
-          title: "Ashfaq Waheed ",
-          email: "ashfaq@gmail.com",
-          followers: "Suljay ghar da mast",
-          Posts: "9",
-          status: "Active",
-          action: "Actions",   
-      },
-      {
-          id: 9,
-          title: "Shahzad ",
-          email: "shahzad@gmail.com",
-          followers: "Bechara",
-          Posts: "10",
-          status: "InActive",
-          action: "Actions",  
-      }
+
+  
     ]);
+    const [noData,setNoData]=useState([
+        {
+            title:"No Data Present" 
+        }
+    ])
+
+
   return (
     <>
+
       <div className="col-lg-12">
         <div className="aw_table_wrapper_user">
           {/* <div className="table_userrs">
@@ -199,7 +128,8 @@ const UserTable = () => {
                     icons={tableIcons}
                     title="Latest User "
                     columns={columns}
-                    data={entries}
+
+                    data={noData}
                     options={{
                       pageSize: 10,
                       pageSizeOptions: [5, 10, 15, 20],
@@ -234,4 +164,4 @@ const UserTable = () => {
   )
 }
 
-export default UserTable
+export default RecyclePostTable

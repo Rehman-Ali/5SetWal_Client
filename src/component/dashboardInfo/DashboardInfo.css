@@ -59,7 +59,7 @@
 
 
 @media only  screen and (max-width:768px) {
-    .icon{
+  .aw_small_box  .icon{
         display: none;
     }
     .aw_small_box .inner{

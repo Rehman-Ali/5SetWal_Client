@@ -109,7 +109,7 @@ const LineChartDemo = () => {
   const { basicOptions, multiAxisOptions } = getLightTheme();
 
   return (
-    <div>
+    <div className="aw_line_chart_wrap">
       <div className="card">
         <div className="monthy_line_chart">
           <h5>Monthly Posts</h5>

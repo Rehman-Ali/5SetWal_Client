@@ -2,26 +2,32 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import User from "../pages/user/User.jsx";
+import Posts from "../pages/posts/Posts";
+import Reports from "../pages/reports/Reports";
+import RecycleUser from "../pages/recycleUser/RecycleUser";
+import RecyclePost from "../pages/recyclePost/RecyclePost";
+import Comments from "../component/comments/Comments";
 
 const Routing = () => {
   return (
     <Routes>
       <Route path="/" element={<h1>this is home page</h1>} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/users" element={<h1>this is users page</h1>} />
-      <Route path="/posts" element={<h1>this is posts page</h1>} />
-      <Route path="/reports" element={<h1>this is reports page</h1>} />
+      <Route path="/users" element={<User/>} />
+      <Route path="/posts" element={<Posts/>} />
+      <Route path="/reports" element={<Reports/>} />
+      <Route path="/comments" element={<Comments/>} />
       <Route
         path="/change-password"
         element={<h1>this is change-password page</h1>}
       />
       <Route
         path="/recyclebin/posts"
-        element={<h1>this is recyclebin/postspage</h1>}
+        element={<RecyclePost/>}
       />
       <Route
         path="/recyclebin/users"
-        element={<h1>this is recyclebin/postspage</h1>}
+        element={<RecycleUser/>}
       />
     </Routes>
   );
