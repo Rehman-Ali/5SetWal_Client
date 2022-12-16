@@ -16,7 +16,7 @@ const Sidebar = () => {
     <>
       <aside
         className={
-          ToggleSidebar ? "gr--main--sidebar responsive" : "gr--main--sidebar"
+          ToggleSidebar ? "gr--main--sidebar " : "gr--main--sidebar responsive"
         }
       >
         <Link to="/" className="branl--link">
