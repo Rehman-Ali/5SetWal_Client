@@ -113,7 +113,7 @@ nav .gr--nav-sidebar li {
 
 @media screen and (max-width: 1200px) {
   .gr--main--sidebar {
-    z-index: 10;
+    z-index: 999999999;
   }
   .gr--main--sidebar.responsive {
     left: -280px;
@@ -122,6 +122,6 @@ nav .gr--nav-sidebar li {
     position: fixed;
     inset: 0;
     background-color: #0000008a;
-    z-index: 0;
+    z-index: 1111;
   }
 }
