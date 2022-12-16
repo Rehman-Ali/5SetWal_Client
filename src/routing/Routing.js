@@ -7,6 +7,7 @@ import Reports from "../pages/reports/Reports";
 import RecycleUser from "../pages/recycleUser/RecycleUser";
 import RecyclePost from "../pages/recyclePost/RecyclePost";
 import Comments from "../component/comments/Comments";
+import Login from "../pages/Login/Login";
 
 const Routing = () => {
   return (
