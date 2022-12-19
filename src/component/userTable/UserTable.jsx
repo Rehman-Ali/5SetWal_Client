@@ -104,12 +104,58 @@ const UserTable = () => {
         console.log(err, "An Error Occured");
       });
   }, [isLoading]);
-  const Updatehandler = (e, b) => {
-    console.log(e, b);
+  const Updatehandler = (data, id) => {
+    setIsLoading(true);
+    console.log("data", data);
+    const header = {
+      "x-auth-token": CurrToken,
+      "Content-Type": "application/json",
+    };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to update status",
+      icon: "warning",
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes Update it!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const body = {
+          user_status: data.user_status === 0 ? 1 : 0,
+        };
+        axios
+          .put(
+            `https://5setwalbackend-production.up.railway.app/api/admin/user/${data.d.ID}`,
+            body,
+            {
+              headers: header,
+            }
+          )
+          .then((res) => {
+            if (res.data.success === 1) {
+              Swal.fire("Updated!", "User status has been Updated.", "success");
+              setIsLoading(false);
+            } else {
+              Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: res.data.message,
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err, "An Error Occured");
+          });
+      }
+    });
   };
   const DeleteHandler = (data, id) => {
     setIsLoading(true);
-
     const header = {
       "x-auth-token": CurrToken,
       "Content-Type": "application/json",

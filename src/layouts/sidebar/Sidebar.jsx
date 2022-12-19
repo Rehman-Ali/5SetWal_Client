@@ -16,7 +16,8 @@ const Sidebar = () => {
   const handelLogout=(event)=>{
     event.preventDefault();
     localStorage.removeItem("Token")
-    navigate("/")
+    navigate('/')
+    navigate(0)
   }
 
   return (
