@@ -28,7 +28,7 @@ const Login = () => {
         user_pass: loginCreditional.password
       }).then((res) => {
         console.log("Response :", res.data.token);
-        localStorage.setItem("Token :", JSON.stringify(res.data.token));
+        localStorage.setItem("Token", JSON.stringify(res.data.token));
         setLoggedIn(false)
         navigate('/dashboard')
       })
