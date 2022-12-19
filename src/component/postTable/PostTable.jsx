@@ -16,10 +16,10 @@ import { TablePagination, Paper } from "@material-ui/core";
 import VisibilityOutlinedIcon from "@material-ui/icons/Visibility";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { ThemeProvider, createTheme } from "@mui/material";
-import pika from '../../assets/images/pika.jpg'
-import sale from '../../assets/images/sale.jpg';
-import shop from '../../assets/images/shop1.jpg';
-import shop2 from '../../assets/images/shop2.jpg'
+import pika from "../../assets/images/pika.jpg";
+import sale from "../../assets/images/sale.jpg";
+import shop from "../../assets/images/shop1.jpg";
+import shop2 from "../../assets/images/shop2.jpg";
 const tableIcons = {
   Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
   DetailPanel: forwardRef((props, ref) => (
@@ -57,7 +57,16 @@ const PostTable = () => {
     },
     {
       title: "Image",
-      field: "image",render:(item)=>{return (<img src={item.image} alt="" style={{width:"40px",height:"40px"}}/>)}
+      field: "image",
+      render: (item) => {
+        return (
+          <img
+            src={item.image}
+            alt=""
+            style={{ width: "40px", height: "40px" }}
+          />
+        );
+      },
     },
     { title: "Content", field: "content" },
     { title: "Created At", field: "created" },
@@ -73,9 +82,9 @@ const PostTable = () => {
       id: 1,
       title: "test",
       email: "gallary_name",
-      image: pika ,
+      image: pika,
       content: "price",
-      created:"created",
+      created: "created",
       status: "status",
       action: "action",
     },
@@ -85,7 +94,7 @@ const PostTable = () => {
       email: "gh@gmail.com",
       image: sale,
       content: "price",
-      created:"created",
+      created: "created",
       status: "status",
       action: "action",
     },
@@ -95,7 +104,7 @@ const PostTable = () => {
       email: "shabi@gmail.com",
       image: shop,
       content: "price",
-      created:"created",
+      created: "created",
       status: "status",
       action: "action",
     },
@@ -105,7 +114,7 @@ const PostTable = () => {
       email: "rehman@gmail.com",
       image: shop2,
       content: "price",
-      created:"created",
+      created: "created",
       status: "status",
       action: "action",
     },
@@ -115,7 +124,7 @@ const PostTable = () => {
       email: "awais@gmail.com",
       image: pika,
       content: "price",
-      created:"created",
+      created: "created",
       status: "status",
       action: "action",
     },
@@ -125,7 +134,7 @@ const PostTable = () => {
       email: "sheraz@gmail.com",
       image: shop,
       content: "price",
-      created:"created",
+      created: "created",
       status: "status",
       action: "action",
     },
@@ -135,7 +144,7 @@ const PostTable = () => {
       email: "talha@gmail.com",
       image: shop2,
       content: "price",
-      created:"created",
+      created: "created",
       status: "status",
       action: "action",
     },
@@ -145,7 +154,7 @@ const PostTable = () => {
       email: "ali@gmail.com",
       image: sale,
       content: "price",
-      created:"created",
+      created: "created",
       status: "status",
       action: "action",
     },
@@ -155,7 +164,7 @@ const PostTable = () => {
       email: "ashfaq@gmail.com",
       image: pika,
       content: "price",
-      created:"created",
+      created: "created",
       status: "status",
       action: "action",
     },
@@ -165,7 +174,7 @@ const PostTable = () => {
       email: "shahzad@gmail.com",
       image: pika,
       content: "price",
-      created:"created",
+      created: "created",
       status: "status",
       action: "action",
     },

@@ -7,28 +7,31 @@ import Reports from "../pages/reports/Reports";
 import RecycleUser from "../pages/recycleUser/RecycleUser";
 import RecyclePost from "../pages/recyclePost/RecyclePost";
 import Comments from "../component/comments/Comments";
+import Login from "../pages/Login/Login";
+import PasswordChange from "../component/passwordchange/PasswordChange";
+import PasswordReset from "../component/passwordreset/PasswordReset";
+import PostDetailView from "../component/postdetialview/PostDetailView";
+import UserDetailView from "../component/userdetailview/UserDetailView";
 
 const Routing = () => {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/users" element={<User/>} />
-      <Route path="/posts" element={<Posts/>} />
-      <Route path="/reports" element={<Reports/>} />
-      <Route path="/comments" element={<Comments/>} />
-      <Route
-        path="/change-password"
-        element={<h1>this is change-password page</h1>}
-      />
-      <Route
-        path="/recyclebin/posts"
-        element={<RecyclePost/>}
-      />
-      <Route
-        path="/recyclebin/users"
-        element={<RecycleUser/>}
-      />
+      <Route path="/users" element={<User />} />
+      <Route path="/posts" element={<Posts />} />
+      <Route path="/reports" element={<Reports />} />
+      {/*       
+      <Route path="/posts/:id" element={<Comments />} />
+      <Route path="/reports:/id" element={<Reports />} /> */}
+
+      <Route path="/post/view" element={<PostDetailView />} />
+      <Route path="/user/view" element={<UserDetailView />} />
+
+      <Route path="/change-password" element={<PasswordChange />} />
+      <Route path="/recyclebin/posts" element={<RecyclePost />} />
+      <Route path="/recyclebin/users" element={<RecycleUser />} />
+      <Route path="/password/reset" element={<PasswordReset />} />
     </Routes>
   );
 };
