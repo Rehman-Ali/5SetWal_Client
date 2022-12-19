@@ -36,13 +36,6 @@ const Login = () => {
     catch (err) {
       console.log("There is an error", err)
     }
-
-
-
-
-    // console.log(loginCreditional);
-
-
   };
   return (
     <>
