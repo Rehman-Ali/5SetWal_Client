@@ -8,6 +8,7 @@ import RecycleUser from "../pages/recycleUser/RecycleUser";
 import RecyclePost from "../pages/recyclePost/RecyclePost";
 import Comments from "../component/comments/Comments";
 import Login from "../pages/Login/Login";
+import Likes from "../component/likes/Likes";
 
 const Routing = () => {
   return (
@@ -18,6 +19,7 @@ const Routing = () => {
       <Route path="/posts" element={<Posts/>} />
       <Route path="/reports" element={<Reports/>} />
       <Route path="/comments" element={<Comments/>} />
+      <Route path="/likes" element={<Likes/>} />
       <Route
         path="/change-password"
         element={<h1>this is change-password page</h1>}

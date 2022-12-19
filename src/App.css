@@ -24,6 +24,9 @@
     display: inline !important;
    
   }
+  .MuiTablePagination-input{
+    left:33%;
+  }
   /* .MuiTablePagination-select {
     text-align: center !important;
    text-align-last: center !important;
