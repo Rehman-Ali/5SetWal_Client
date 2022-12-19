@@ -18,7 +18,8 @@ import LoginProtected from "../ProtectedRoutes/LoginProtected";
 const Routing = () => {
   return (
     <Routes>
-      <Route path="/" element={ <LoginProtected Component={Login} /> } />
+      <Route path="/" element={ <LoginProtected Component={Dashboard} /> } />
+      {/* <Route path="/login" element={ <LoginProtected Component={Login} /> } /> */}
       <Route path="/dashboard" element={<ProtectedRoute Component={Dashboard} />} />
       <Route path="/users" element={<ProtectedRoute Component={User} />} />
       <Route path="/posts" element={<ProtectedRoute Component={Posts} />} />
