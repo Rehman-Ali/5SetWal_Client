@@ -22,7 +22,7 @@
     width: 100px !important;
 }
 .table_body{
-   
+   background-color: #fff !important;
     padding: 1.25rem;
 }
 .dataTables_length label    , .datatable_filter label{
@@ -54,3 +54,14 @@ width: 200px !important;
 .aw_table_wrapper .MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.MTableToolbar-root-19.css-hyum1k-MuiToolbar-root {
     padding: 0px !important;
 }
+
+
+
+@media  screen and (max-width: 400px){
+    .MTablePaginationInner-root-42 {
+        color: rgba(0, 0, 0, 0.6);
+        display: inline !important;
+        flex-shrink: 0;
+    }
+}
+    

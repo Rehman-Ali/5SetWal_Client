@@ -1,5 +1,5 @@
 import React, { useRef, forwardRef } from "react";
-import './UserTable.css'
+import './RecycleUserTable.css'
 import MaterialTable from "material-table";
 import { useState } from "react";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
@@ -39,8 +39,7 @@ const tableIcons = {
     SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
   };
-
-const UserTable = () => {
+const RecycleUserTable = () => {
     const tableRef = useRef(null);
     const defaultMaterialTheme = createTheme();
     const columns = [
@@ -57,6 +56,7 @@ const UserTable = () => {
         title: "Followers",
         field: "followers",
       },
+      {title:"Following",field:"following"},
       { title: "Posts", field: "Posts" },
       { title: "Status", field: "status" },
       {
@@ -68,98 +68,21 @@ const UserTable = () => {
     const [entries, setEnteries] = useState([
       {
         id: 1,
-        title: "test",
-        email: "gallary_name",
-        followers: "category_name",
-        Posts: "price",
-        status: "product_discount_price",
-        action: "product_status",
+        title: "Soni",
+        email: "testing@gmail.com",
+        followers: "2",
+        following:"3",
+        Posts: "0",
+        status: "Active",
+        action: "Action",
       },
-      {
-          id: 2,
-          title: "Ghulam Rasool",
-          email: "gh@gmail.com",
-          followers: "gr",
-          Posts: "2",
-          status: "Active",
-          action: "Actions", 
-      },
-      {
-          id: 3,
-          title: "Shoaib",
-          email: "shabi@gmail.com",
-          followers: "shaoiab",
-          Posts: "3",
-          status: "In-Active",
-          action: "Actions", 
-      },
-      {
-          id: 4,
-          title: "Rehman",
-          email: "rehman@gmail.com",
-          followers: "rehman",
-          Posts: "4",
-          status: "Active",
-          action: "Actions", 
-      },
-      {
-          id: 5,
-          title: "Awais",
-          email: "awais@gmail.com",
-          followers: "awais",
-          Posts: "5",
-          status: "In-Active",
-          action: "Actions", 
-      },
-      {
-          id: 6,
-          title: "Sheraz ",
-          email: "sheraz@gmail.com",
-          followers: "sheraz",
-          Posts: "6",
-          status: "Active",
-          action: "Actions",  
-      },
-      {
-          id: 7,
-          title: "Talha ",
-          email: "talha@gmail.com",
-          followers: "talha",
-          Posts: "7",
-          status: "Active",
-          action: "Actions",  
-      },
-      {
-          id: 7,
-          title: "Ali ",
-          email: "ali@gmail.com",
-          followers: "ali",
-          Posts: "8",
-          status: "Active",
-          action: "Actions",  
-      },
-      {
-          id: 8,
-          title: "Ashfaq Waheed ",
-          email: "ashfaq@gmail.com",
-          followers: "Suljay ghar da mast",
-          Posts: "9",
-          status: "Active",
-          action: "Actions",   
-      },
-      {
-          id: 9,
-          title: "Shahzad ",
-          email: "shahzad@gmail.com",
-          followers: "Bechara",
-          Posts: "10",
-          status: "InActive",
-          action: "Actions",  
-      }
+
     ]);
+
+
   return (
     <>
-      <div className="col-lg-12">
+     <div className="col-lg-12">
         <div className="aw_table_wrapper_user">
           {/* <div className="table_userrs">
             <h3>Latest Users</h3>
@@ -197,7 +120,7 @@ const UserTable = () => {
                   <MaterialTable
                     tableRef={tableRef}
                     icons={tableIcons}
-                    title="Latest User "
+                    title="Users Listing"
                     columns={columns}
                     data={entries}
                     options={{
@@ -234,4 +157,4 @@ const UserTable = () => {
   )
 }
 
-export default UserTable
+export default RecycleUserTable

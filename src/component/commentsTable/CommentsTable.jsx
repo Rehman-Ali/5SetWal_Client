@@ -1,7 +1,6 @@
 import React, { useRef, forwardRef } from "react";
-import './UserTable.css'
-import MaterialTable from "material-table";
 import { useState } from "react";
+import MaterialTable from "material-table";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
@@ -17,30 +16,33 @@ import { TablePagination, Paper } from "@material-ui/core";
 import VisibilityOutlinedIcon from "@material-ui/icons/Visibility";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { ThemeProvider, createTheme } from "@mui/material";
+import pika from '../../assets/images/pika.jpg'
+import sale from '../../assets/images/sale.jpg';
+import shop from '../../assets/images/shop1.jpg';
+import shop2 from '../../assets/images/shop2.jpg'
 const tableIcons = {
-    Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
-    DetailPanel: forwardRef((props, ref) => (
-      <ChevronRight {...props} ref={ref} />
-    )),
-    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
-    View: forwardRef((props, ref) => (
-      <VisibilityOutlinedIcon {...props} ref={ref} />
-    )),
-    Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
-    Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
-    FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
-    LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
-    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-    PreviousPage: forwardRef((props, ref) => (
-      <ChevronLeft {...props} ref={ref} />
-    )),
-    ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
-    SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
-    ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-  };
-
-const UserTable = () => {
+  Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
+  DetailPanel: forwardRef((props, ref) => (
+    <ChevronRight {...props} ref={ref} />
+  )),
+  Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+  View: forwardRef((props, ref) => (
+    <VisibilityOutlinedIcon {...props} ref={ref} />
+  )),
+  Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+  Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+  FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+  LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+  NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+  PreviousPage: forwardRef((props, ref) => (
+    <ChevronLeft {...props} ref={ref} />
+  )),
+  ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+  Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+  SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
+  ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
+};
+const Commentstable = () => {
     const tableRef = useRef(null);
     const defaultMaterialTheme = createTheme();
     const columns = [
@@ -50,116 +52,47 @@ const UserTable = () => {
       },
       { title: "Name", field: "title" },
       {
-        title: "Email",
-        field: "email",
+        title: "Post Title",
+        field: "post",
       },
       {
-        title: "Followers",
-        field: "followers",
+        title: "Image",
+        field: "image",render:(item)=>{return (<img src={item.image} alt="" style={{width:"40px",height:"40px"}}/>)}
       },
-      { title: "Posts", field: "Posts" },
-      { title: "Status", field: "status" },
+      { title: "Content", field: "content" },
+      { title: "Created At", field: "created" },
+     
       {
         title: "Action",
         field: "action",
       },
     ];
-  
     const [entries, setEnteries] = useState([
-      {
-        id: 1,
-        title: "test",
-        email: "gallary_name",
-        followers: "category_name",
-        Posts: "price",
-        status: "product_discount_price",
-        action: "product_status",
-      },
-      {
+        {
+          id: 1,
+          title: "test",
+          post: "gallary_name",
+          image: pika ,
+          content: "price",
+          created:"created",
+          status: "status",
+          action: "action",
+        },
+        {
           id: 2,
           title: "Ghulam Rasool",
-          email: "gh@gmail.com",
-          followers: "gr",
-          Posts: "2",
-          status: "Active",
-          action: "Actions", 
-      },
-      {
-          id: 3,
-          title: "Shoaib",
-          email: "shabi@gmail.com",
-          followers: "shaoiab",
-          Posts: "3",
-          status: "In-Active",
-          action: "Actions", 
-      },
-      {
-          id: 4,
-          title: "Rehman",
-          email: "rehman@gmail.com",
-          followers: "rehman",
-          Posts: "4",
-          status: "Active",
-          action: "Actions", 
-      },
-      {
-          id: 5,
-          title: "Awais",
-          email: "awais@gmail.com",
-          followers: "awais",
-          Posts: "5",
-          status: "In-Active",
-          action: "Actions", 
-      },
-      {
-          id: 6,
-          title: "Sheraz ",
-          email: "sheraz@gmail.com",
-          followers: "sheraz",
-          Posts: "6",
-          status: "Active",
-          action: "Actions",  
-      },
-      {
-          id: 7,
-          title: "Talha ",
-          email: "talha@gmail.com",
-          followers: "talha",
-          Posts: "7",
-          status: "Active",
-          action: "Actions",  
-      },
-      {
-          id: 7,
-          title: "Ali ",
-          email: "ali@gmail.com",
-          followers: "ali",
-          Posts: "8",
-          status: "Active",
-          action: "Actions",  
-      },
-      {
-          id: 8,
-          title: "Ashfaq Waheed ",
-          email: "ashfaq@gmail.com",
-          followers: "Suljay ghar da mast",
-          Posts: "9",
-          status: "Active",
-          action: "Actions",   
-      },
-      {
-          id: 9,
-          title: "Shahzad ",
-          email: "shahzad@gmail.com",
-          followers: "Bechara",
-          Posts: "10",
-          status: "InActive",
-          action: "Actions",  
-      }
-    ]);
+          post: "gh@gmail.com",
+          image: sale,
+          content: "price",
+          created:"created",
+          status: "status",
+          action: "action",
+        },
+   
+      ]);
   return (
     <>
-      <div className="col-lg-12">
+     <div className="col-lg-12">
         <div className="aw_table_wrapper_user">
           {/* <div className="table_userrs">
             <h3>Latest Users</h3>
@@ -197,7 +130,7 @@ const UserTable = () => {
                   <MaterialTable
                     tableRef={tableRef}
                     icons={tableIcons}
-                    title="Latest User "
+                    title="Posts "
                     columns={columns}
                     data={entries}
                     options={{
@@ -215,10 +148,7 @@ const UserTable = () => {
                     }}
                     components={{
                       Pagination: (props) => (
-                        <TablePagination
-                          {...props}
-                          rowsPerPage={10}
-                        />
+                        <TablePagination {...props} rowsPerPage={10} />
                       ),
 
                       Container: (props) => <Paper {...props} elevation={0} />,
@@ -234,4 +164,4 @@ const UserTable = () => {
   )
 }
 
-export default UserTable
+export default Commentstable

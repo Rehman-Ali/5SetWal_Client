@@ -1,5 +1,5 @@
 import React, { useRef, forwardRef } from "react";
-import './UserTable.css'
+import './ReportsTable.css'
 import MaterialTable from "material-table";
 import { useState } from "react";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
@@ -17,6 +17,9 @@ import { TablePagination, Paper } from "@material-ui/core";
 import VisibilityOutlinedIcon from "@material-ui/icons/Visibility";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { ThemeProvider, createTheme } from "@mui/material";
+import pika from '../../assets/images/pika.jpg';
+import shop from '../../assets/images/shop1.jpg';
+import shop2 from '../../assets/images/shop3.jpg'
 const tableIcons = {
     Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
     DetailPanel: forwardRef((props, ref) => (
@@ -39,8 +42,13 @@ const tableIcons = {
     SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
   };
+const ReportsTable = () => {
 
-const UserTable = () => {
+
+    const _handlePostBlock=()=>{
+
+    }
+
     const tableRef = useRef(null);
     const defaultMaterialTheme = createTheme();
     const columns = [
@@ -48,115 +56,91 @@ const UserTable = () => {
         title: "ID",
         field: "id",
       },
-      { title: "Name", field: "title" },
+      { title: "User", field: "user" },
       {
-        title: "Email",
-        field: "email",
+        title: "Parent",
+        field: "parent",
       },
       {
-        title: "Followers",
-        field: "followers",
+        title: "Post",
+        field: "post",render:(item)=>{return (<img src={item.post} alt="" style={{width:"40px",height:"40px"}}/>)}
       },
-      { title: "Posts", field: "Posts" },
-      { title: "Status", field: "status" },
+      { title: "Report", field: "report"},
+      { title: "Post B/U", field: "blockstatus",render:(data)=>data&&(<select ><option onClick={_handlePostBlock} className="post_block">Post Block </option><option>Post UnBlock</option></select>)  },
       {
-        title: "Action",
-        field: "action",
+        title: "User B/U",
+        field: "userbu",render:(userbn)=>userbn&&(<select><option>User Block </option><option>User UnBlock</option></select>) 
       },
     ];
   
     const [entries, setEnteries] = useState([
       {
         id: 1,
-        title: "test",
-        email: "gallary_name",
-        followers: "category_name",
-        Posts: "price",
-        status: "product_discount_price",
-        action: "product_status",
+        user: "test",
+        parent: "gallary_name",
+        post: pika,
+        report: "price",
+        blockstatus: "product_discount_price",
+        userbu: "product_status",
       },
       {
-          id: 2,
-          title: "Ghulam Rasool",
-          email: "gh@gmail.com",
-          followers: "gr",
-          Posts: "2",
-          status: "Active",
-          action: "Actions", 
+        id: 2,
+        user: "test",
+        parent: "gallary_name",
+        post: shop,
+        report: "price",
+        blockstatus: "product_discount_price",
+        userbu: "product_status",
       },
       {
-          id: 3,
-          title: "Shoaib",
-          email: "shabi@gmail.com",
-          followers: "shaoiab",
-          Posts: "3",
-          status: "In-Active",
-          action: "Actions", 
+        id: 3,
+        user: "test",
+        parent: "gallary_name",
+        post: shop2,
+        report: "price",
+        blockstatus: "product_discount_price",
+        userbu: "product_status", 
       },
       {
-          id: 4,
-          title: "Rehman",
-          email: "rehman@gmail.com",
-          followers: "rehman",
-          Posts: "4",
-          status: "Active",
-          action: "Actions", 
+        id: 4,
+        user: "test",
+        parent: "gallary_name",
+        post: pika,
+        report: "price",
+        blockstatus: "product_discount_price",
+        userbu: "product_status",
       },
       {
-          id: 5,
-          title: "Awais",
-          email: "awais@gmail.com",
-          followers: "awais",
-          Posts: "5",
-          status: "In-Active",
-          action: "Actions", 
+        id: 5,
+        user: "test",
+        parent: "gallary_name",
+        post: shop,
+        report: "price",
+        blockstatus: "product_discount_price",
+        userbu: "product_status",
       },
       {
-          id: 6,
-          title: "Sheraz ",
-          email: "sheraz@gmail.com",
-          followers: "sheraz",
-          Posts: "6",
-          status: "Active",
-          action: "Actions",  
+        id: 6,
+        user: "test",
+        parent: "gallary_name",
+        post: shop2,
+        report: "price",
+        blockstatus: "product_discount_price",
+        userbu: "product_status",
       },
       {
-          id: 7,
-          title: "Talha ",
-          email: "talha@gmail.com",
-          followers: "talha",
-          Posts: "7",
-          status: "Active",
-          action: "Actions",  
+        id: 7,
+        user: "test",
+        parent: "gallary_name",
+        post: shop,
+        report: "price",
+        blockstatus: "product_discount_price",
+        userbu: "product_status",
       },
-      {
-          id: 7,
-          title: "Ali ",
-          email: "ali@gmail.com",
-          followers: "ali",
-          Posts: "8",
-          status: "Active",
-          action: "Actions",  
-      },
-      {
-          id: 8,
-          title: "Ashfaq Waheed ",
-          email: "ashfaq@gmail.com",
-          followers: "Suljay ghar da mast",
-          Posts: "9",
-          status: "Active",
-          action: "Actions",   
-      },
-      {
-          id: 9,
-          title: "Shahzad ",
-          email: "shahzad@gmail.com",
-          followers: "Bechara",
-          Posts: "10",
-          status: "InActive",
-          action: "Actions",  
-      }
+    
     ]);
+
+
   return (
     <>
       <div className="col-lg-12">
@@ -197,7 +181,7 @@ const UserTable = () => {
                   <MaterialTable
                     tableRef={tableRef}
                     icons={tableIcons}
-                    title="Latest User "
+                    title="Reports "
                     columns={columns}
                     data={entries}
                     options={{
@@ -215,10 +199,7 @@ const UserTable = () => {
                     }}
                     components={{
                       Pagination: (props) => (
-                        <TablePagination
-                          {...props}
-                          rowsPerPage={10}
-                        />
+                        <TablePagination {...props} rowsPerPage={10} />
                       ),
 
                       Container: (props) => <Paper {...props} elevation={0} />,
@@ -231,7 +212,7 @@ const UserTable = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default UserTable
+export default ReportsTable;

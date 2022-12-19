@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
-import { Chart } from 'primereact/chart';
-import './BarChart.css'
+import React, { useState } from "react";
+import { Chart } from "primereact/chart";
+import "./BarChart.css";
 const BarChart = () => {
- 
-    const [basicData] = useState({
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [
-            {
-                label: 'My First dataset',
-                backgroundColor: '#42A5F5',
-                data: [65, 59, 80, 81, 56, 55, 40]
-            },
-            {
-                label: 'My Second dataset',
-                backgroundColor: '#FFA726',
-                data: [28, 48, 40, 19, 86, 27, 90]
-            }
-        ]
-    });
+  const [basicData] = useState({
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+      {
+        label: "My First dataset",
+        backgroundColor: "#42A5F5",
+        data: [65, 59, 80, 81, 56, 55, 40],
+      },
+      {
+        label: "My Second dataset",
+        backgroundColor: "#FFA726",
+        data: [28, 48, 40, 19, 86, 27, 90],
+      },
+    ],
+  });
 
   const getLightTheme = () => {
     let basicOptions = {
@@ -25,10 +24,7 @@ const BarChart = () => {
       aspectRatio: 0.6,
       plugins: {
         legend: {
-        
-              display:false,
-             
-           
+          display: false,
         },
       },
       scales: {
@@ -36,70 +32,65 @@ const BarChart = () => {
           ticks: {
             color: "#495057",
           },
-            grid: {
-              display:false,
-             
-            },
+          grid: {
+            display: false,
+          },
         },
         y: {
           ticks: {
             color: "#495057",
           },
-            grid: {
-              display:false,
-            },
+          grid: {
+            display: false,
+          },
         },
       },
     };
 
-  
-
     return {
       basicOptions,
-     
     };
   };
 
   const { basicOptions, multiAxisOptions } = getLightTheme();
   return (
     <>
+      <div className="aw_line_chart_wrap">
         <div className="card">
-          <div className='card_Bar'>
-                <h5>Monthly Users</h5>
+          <div className="card_Bar">
+            <h5>Monthly Users</h5>
           </div>
           <div className="total_posts">
-          <div className="total_ d-flex justify-content-between">
-            <h6>18</h6>
-            <p>
-              <span>
-                <i className="fa-solid fa-arrow-up"></i>
-              </span>
-              33.1%
-            </p>
+            <div className="total_ d-flex justify-content-between">
+              <h6>18</h6>
+              <p>
+                <span>
+                  <i className="fa-solid fa-arrow-up"></i>
+                </span>
+                33.1%
+              </p>
+            </div>
+            <div className="post_lastmonth">
+              <p>Users</p>
+              <p>Since Last Month</p>
+            </div>
           </div>
-          <div className="post_lastmonth">
-               <p>Users</p>
-               <p>Since Last Month</p> 
+          <Chart type="bar" data={basicData} options={basicOptions} />
+
+          <div className="monthss">
+            <div className="this_month">
+              <span></span>
+              <p>This Month</p>
+            </div>
+            <div className="last_month">
+              <span></span>
+              <p>Last Month</p>
+            </div>
           </div>
         </div>
-                <Chart type="bar" data={basicData} options={basicOptions} />
-
-
-                <div className="monthss">
-          <div className="this_month">
-            <span></span>
-            <p>This Month</p>
-          </div>
-          <div className="last_month">
-            <span></span>
-            <p>Last Month</p>
-          </div>
-        </div>
-        </div>
-
-
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default BarChart
+export default BarChart;
