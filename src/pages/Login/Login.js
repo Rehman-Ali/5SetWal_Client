@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import "./Login.css";
 import logo from "../../assets/images/logo-admin-5etwal.png";
-import { Link } from "react-router-dom";
+import { json, Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
+
 const Login = () => {
+  const navigate = useNavigate();
+  const [loggedIn,setLoggedIn] = useState(false);
   const [loginCreditional, setLoginCreditional] = useState({
     email: "",
     password: "",
@@ -16,7 +20,29 @@ const Login = () => {
   };
   const handleLogin = (event) => {
     event.preventDefault();
-    console.log(loginCreditional);
+    try {
+      setLoggedIn(true)
+      axios.post('https://5setwalbackend-production.up.railway.app/api/admin/signin',
+        {
+        user_email: loginCreditional.email,
+        user_pass: loginCreditional.password
+      }).then((res) => {
+        console.log("Response :", res.data.token);
+        localStorage.setItem("Token :", JSON.stringify(res.data.token));
+        setLoggedIn(false)
+        navigate('/dashboard')
+      })
+    }
+    catch (err) {
+      console.log("There is an error", err)
+    }
+
+
+
+
+    // console.log(loginCreditional);
+
+
   };
   return (
     <>
@@ -79,7 +105,7 @@ const Login = () => {
                       name="button"
                       className="btn login_btn"
                     >
-                      Login
+                    {loggedIn ? <div> <i className="fa-solid fa-circle-notch fa-spin"></i>  Login </div>: "Login" }
                     </button>
                   </div>
                 </div>
