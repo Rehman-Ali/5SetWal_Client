@@ -9,8 +9,10 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.2.1",
     "bootstrap": "^5.2.3",
     "chart.js": "^4.0.1",
+    "dotenv": "^16.0.3",
     "material-table": "^2.0.3",
     "primeicons": "^6.0.1",
     "primereact": "^8.7.3",
@@ -21,6 +23,7 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.1",
     "redux": "^4.2.0",
+    "sweetalert2": "^11.6.15",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
