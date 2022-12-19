@@ -14,15 +14,17 @@
   }
 }
 @media screen and (max-width: 500px) {
-  .MuiPaper-root h6{
+  .MuiPaper-root h6 {
     display: none;
   }
 }
 
 @media screen and (max-width: 440px) {
-  .MuiTablePagination-toolbar{
+  .MuiTablePagination-toolbar {
     display: inline !important;
-   
+  }
+  .MuiTablePagination-input {
+    left: 33%;
   }
   /* .MuiTablePagination-select {
     text-align: center !important;
@@ -34,7 +36,7 @@
 .MuiSelect-select.MuiSelect-select{
   padding:0px !important;
 } */
-/* .MuiInputBase-root{
+  /* .MuiInputBase-root{
   position: absolute;
   left: 100px !important;
 } */
@@ -45,4 +47,3 @@
     left: 72px !important;
   }
 } */
-
