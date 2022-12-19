@@ -1,5 +1,6 @@
-import React, { useRef, forwardRef } from "react";
-import './UserTable.css'
+import React, { useRef, forwardRef, useEffect } from "react";
+import "./UserTable.css";
+import Swal from "sweetalert2";
 import MaterialTable from "material-table";
 import { useState } from "react";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
@@ -7,6 +8,7 @@ import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import Clear from "@material-ui/icons/Clear";
 import Edit from "@material-ui/icons/Edit";
+
 import FilterList from "@material-ui/icons/FilterList";
 import FirstPage from "@material-ui/icons/FirstPage";
 import LastPage from "@material-ui/icons/LastPage";
@@ -17,180 +19,194 @@ import { TablePagination, Paper } from "@material-ui/core";
 import VisibilityOutlinedIcon from "@material-ui/icons/Visibility";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { ThemeProvider, createTheme } from "@mui/material";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const tableIcons = {
-    Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
-    DetailPanel: forwardRef((props, ref) => (
-      <ChevronRight {...props} ref={ref} />
-    )),
-    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
-    View: forwardRef((props, ref) => (
-      <VisibilityOutlinedIcon {...props} ref={ref} />
-    )),
-    Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
-    Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
-    FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
-    LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
-    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-    PreviousPage: forwardRef((props, ref) => (
-      <ChevronLeft {...props} ref={ref} />
-    )),
-    ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
-    SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
-    ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-  };
+  Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
+  DetailPanel: forwardRef((props, ref) => (
+    <ChevronRight {...props} ref={ref} />
+  )),
+  Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+  View: forwardRef((props, ref) => (
+    <VisibilityOutlinedIcon {...props} ref={ref} />
+  )),
+  Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+  Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+  FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+  LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+  NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+  PreviousPage: forwardRef((props, ref) => (
+    <ChevronLeft {...props} ref={ref} />
+  )),
+  ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+  Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+  SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
+  ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
+};
 
 const UserTable = () => {
-    const tableRef = useRef(null);
-    const defaultMaterialTheme = createTheme();
-    const columns = [
-      {
-        title: "ID",
-        field: "id",
-      },
-      { title: "Name", field: "title" },
-      {
-        title: "Email",
-        field: "email",
-      },
-      {
-        title: "Followers",
-        field: "followers",
-      },
-      { title: "Posts", field: "Posts" },
-      { title: "Status", field: "status" },
-      {
-        title: "Action",
-        field: "action",
-      },
-    ];
-  
-    const [entries, setEnteries] = useState([
-      {
-        id: 1,
-        title: "test",
-        email: "gallary_name",
-        followers: "category_name",
-        Posts: "price",
-        status: "product_discount_price",
-        action: "product_status",
-      },
-      {
-          id: 2,
-          title: "Ghulam Rasool",
-          email: "gh@gmail.com",
-          followers: "gr",
-          Posts: "2",
-          status: "Active",
-          action: "Actions", 
-      },
-      {
-          id: 3,
-          title: "Shoaib",
-          email: "shabi@gmail.com",
-          followers: "shaoiab",
-          Posts: "3",
-          status: "In-Active",
-          action: "Actions", 
-      },
-      {
-          id: 4,
-          title: "Rehman",
-          email: "rehman@gmail.com",
-          followers: "rehman",
-          Posts: "4",
-          status: "Active",
-          action: "Actions", 
-      },
-      {
-          id: 5,
-          title: "Awais",
-          email: "awais@gmail.com",
-          followers: "awais",
-          Posts: "5",
-          status: "In-Active",
-          action: "Actions", 
-      },
-      {
-          id: 6,
-          title: "Sheraz ",
-          email: "sheraz@gmail.com",
-          followers: "sheraz",
-          Posts: "6",
-          status: "Active",
-          action: "Actions",  
-      },
-      {
-          id: 7,
-          title: "Talha ",
-          email: "talha@gmail.com",
-          followers: "talha",
-          Posts: "7",
-          status: "Active",
-          action: "Actions",  
-      },
-      {
-          id: 7,
-          title: "Ali ",
-          email: "ali@gmail.com",
-          followers: "ali",
-          Posts: "8",
-          status: "Active",
-          action: "Actions",  
-      },
-      {
-          id: 8,
-          title: "Ashfaq Waheed ",
-          email: "ashfaq@gmail.com",
-          followers: "Suljay ghar da mast",
-          Posts: "9",
-          status: "Active",
-          action: "Actions",   
-      },
-      {
-          id: 9,
-          title: "Shahzad ",
-          email: "shahzad@gmail.com",
-          followers: "Bechara",
-          Posts: "10",
-          status: "InActive",
-          action: "Actions",  
+  const [CurrToken, setToken] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useNavigate();
+  const [allUsers, setAllUsers] = useState([]);
+  const tableRef = useRef(null);
+  const defaultMaterialTheme = createTheme();
+  const columns = [
+    {
+      title: "ID",
+      field: "ID",
+    },
+    { title: "Name", field: "display_name" },
+    {
+      title: "Email",
+      field: "user_email",
+    },
+    {
+      title: "Nice Name",
+      field: "user_nicename",
+    },
+    // { title: "Posts", field: "Posts" },
+    {
+      title: "Status",
+      field: "user_status",
+      render: (rowData) =>
+        rowData.user_status === 1 ? (
+          <button className="btn btn-info">Active</button>
+        ) : (
+          <button className="btn btn-danger">Inactive</button>
+        ),
+    },
+    // {
+    //   title: "Action",
+    //   field: "action",
+    // },
+  ];
+
+  const [entries, setEnteries] = useState([]);
+  useEffect(() => {
+    let token = JSON.parse(localStorage.getItem("Token"));
+    setToken(JSON.parse(localStorage.getItem("Token")));
+
+    const header = {
+      "x-auth-token": token,
+      "Content-Type": "application/json",
+    };
+
+    axios
+      .get("https://5setwalbackend-production.up.railway.app/api/admin/users", {
+        headers: header,
+      })
+      .then((resp) => {
+        setEnteries(resp.data.data);
+        console.log(" =>", resp.data);
+      })
+      .catch((err) => {
+        console.log(err, "An Error Occured");
+      });
+  }, [isLoading]);
+  const Updatehandler = (data, id) => {
+    setIsLoading(true);
+    console.log("data", data);
+    const header = {
+      "x-auth-token": CurrToken,
+      "Content-Type": "application/json",
+    };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to update status",
+      icon: "warning",
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes Update it!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const body = {
+          user_status: data.user_status === 0 ? 1 : 0,
+        };
+        axios
+          .put(
+            `https://5setwalbackend-production.up.railway.app/api/admin/user/${data.d.ID}`,
+            body,
+            {
+              headers: header,
+            }
+          )
+          .then((res) => {
+            if (res.data.success === 1) {
+              Swal.fire("Updated!", "User status has been Updated.", "success");
+              setIsLoading(false);
+            } else {
+              Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: res.data.message,
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err, "An Error Occured");
+          });
       }
-    ]);
+    });
+  };
+  const DeleteHandler = (data, id) => {
+    setIsLoading(true);
+      const header = {
+      "x-auth-token": CurrToken,
+      "Content-Type": "application/json",
+    };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to delete User",
+      icon: "warning",
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes Delete it!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(
+            `https://5setwalbackend-production.up.railway.app/api/admin/user/${data.ID}`,
+            {
+              headers: header,
+            }
+          )
+          .then((res) => {
+            if (res.data.success === 1) {
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              // router(0);
+              setIsLoading(false);
+            } else {
+              Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: res.data.message,
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err, "An Error Occured");
+          });
+      }
+    });
+  };
+  const Viewhandler = () => {};
+
   return (
     <>
       <div className="col-lg-12">
         <div className="aw_table_wrapper_user">
-          {/* <div className="table_userrs">
-            <h3>Latest Users</h3>
-          </div> */}
           <div className="table_body">
-            {/* <div className="row">
-              <div className="col-lg-6 col-md-6 col-sm-12">
-                <div className="dataTables_length">
-                  <label>Show</label>
-                  <select
-                    className="form-select custom_class_select"
-                    aria-label="Default select example"
-                  >
-                    <option defaultValue className="custom_style_option">
-                      10
-                    </option>
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                  </select>
-                  <label>entries</label>
-                </div>
-              </div>
-              <div className="col-lg-6 col-md-6 col-sm-12">
-                <div className="datatable_filter">
-                  <label> Search: </label>
-                  <input className="form-control" />
-                </div>
-              </div>
-            </div> */}
             <div className="row">
               <div className="col-lg-12 col-md-12 col-sm-12 ">
                 <ThemeProvider theme={defaultMaterialTheme}>
@@ -200,6 +216,32 @@ const UserTable = () => {
                     title="Latest User "
                     columns={columns}
                     data={entries}
+                    actions={[
+                      {
+                        icon: () => <DeleteIcon />,
+                        tooltip: "Remove",
+                        onClick: (event, data) => DeleteHandler(data),
+                      },
+                      {
+                        icon: () => <Edit />,
+                        tooltip: "Change Status",
+                        onClick: (event, data) =>
+                          Updatehandler({
+                            e: event,
+                            d: data,
+                          }),
+                      },
+
+                      {
+                        icon: () => <VisibilityOutlinedIcon />,
+                        tooltip: "View",
+                        onClick: (event, data) =>
+                          Viewhandler({
+                            e: event,
+                            d: data,
+                          }),
+                      },
+                    ]}
                     options={{
                       pageSize: 10,
                       pageSizeOptions: [5, 10, 15, 20],
@@ -215,10 +257,7 @@ const UserTable = () => {
                     }}
                     components={{
                       Pagination: (props) => (
-                        <TablePagination
-                          {...props}
-                          rowsPerPage={10}
-                        />
+                        <TablePagination {...props} rowsPerPage={10} />
                       ),
 
                       Container: (props) => <Paper {...props} elevation={0} />,
@@ -231,7 +270,7 @@ const UserTable = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default UserTable
+export default UserTable;

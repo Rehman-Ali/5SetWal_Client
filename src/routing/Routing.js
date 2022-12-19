@@ -12,15 +12,18 @@ import PasswordChange from "../component/passwordchange/PasswordChange";
 import PasswordReset from "../component/passwordreset/PasswordReset";
 import PostDetailView from "../component/postdetialview/PostDetailView";
 import UserDetailView from "../component/userdetailview/UserDetailView";
+import ProtectedRoute from "../ProtectedRoutes/ProtectedRoute";
+import LoginProtected from "../ProtectedRoutes/LoginProtected";
 
 const Routing = () => {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/users" element={<User />} />
-      <Route path="/posts" element={<Posts />} />
-      <Route path="/reports" element={<Reports />} />
+      <Route path="/" element={ <LoginProtected Component={Dashboard} /> } />
+      {/* <Route path="/login" element={ <LoginProtected Component={Login} /> } /> */}
+      <Route path="/dashboard" element={<ProtectedRoute Component={Dashboard} />} />
+      <Route path="/users" element={<ProtectedRoute Component={User} />} />
+      <Route path="/posts" element={<ProtectedRoute Component={Posts} />} />
+      <Route path="/reports" element={<ProtectedRoute Component={Reports} />} />
       {/*       
       <Route path="/posts/:id" element={<Comments />} />
       <Route path="/reports:/id" element={<Reports />} /> */}

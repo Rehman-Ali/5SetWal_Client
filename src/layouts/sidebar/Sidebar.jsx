@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import adminlogo from "../../assets/images/logo-admin-5etwal.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate  } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import "./Sidebar.css";
 const Sidebar = () => {
+  const navigate = useNavigate()
   const [recycleList, SetRecyleList] = useState(false);
   const { ToggleSidebar } = useSelector((state) => state.Reducer);
   const dispatch = useDispatch();
@@ -12,6 +13,13 @@ const Sidebar = () => {
   const hanldeRecyclePop = () => {
     SetRecyleList(!recycleList);
   };
+  const handelLogout=(event)=>{
+    event.preventDefault();
+    localStorage.removeItem("Token")
+    navigate('/')
+    navigate(0)
+  }
+
   return (
     <>
       <aside
@@ -91,7 +99,7 @@ const Sidebar = () => {
               </li>
 
               <li className="nav--sidebar--item">
-                <Link className="link">
+                <Link className="link" onClick={handelLogout}>
                   <i className="fa-solid fa-table"></i>
                   <p>logout</p>
                 </Link>
