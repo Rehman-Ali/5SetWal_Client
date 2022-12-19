@@ -20,7 +20,7 @@ import VisibilityOutlinedIcon from "@material-ui/icons/Visibility";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { ThemeProvider, createTheme } from "@mui/material";
 import axios from "axios";
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const tableIcons = {
   Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
   DetailPanel: forwardRef((props, ref) => (
@@ -45,8 +45,8 @@ const tableIcons = {
 };
 
 const UserTable = () => {
-  const [CurrToken,setToken]=useState("");
-const [isLoading,setIsLoading]=useState(false)
+  const [CurrToken, setToken] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useNavigate();
   const [allUsers, setAllUsers] = useState([]);
   const tableRef = useRef(null);
@@ -66,14 +66,16 @@ const [isLoading,setIsLoading]=useState(false)
       field: "user_nicename",
     },
     // { title: "Posts", field: "Posts" },
-    { title: "Status", field: "user_status" ,
-    render: (rowData) =>
-    rowData.user_status === 1 ? (
-      <button className="btn btn-info">Active</button>
-    ) : (
-      <button className="btn btn-danger">Inactive</button>
-    ),
-},
+    {
+      title: "Status",
+      field: "user_status",
+      render: (rowData) =>
+        rowData.user_status === 1 ? (
+          <button className="btn btn-info">Active</button>
+        ) : (
+          <button className="btn btn-danger">Inactive</button>
+        ),
+    },
     // {
     //   title: "Action",
     //   field: "action",
@@ -83,7 +85,7 @@ const [isLoading,setIsLoading]=useState(false)
   const [entries, setEnteries] = useState([]);
   useEffect(() => {
     let token = JSON.parse(localStorage.getItem("Token"));
-    setToken(JSON.parse(localStorage.getItem("Token")))
+    setToken(JSON.parse(localStorage.getItem("Token")));
 
     const header = {
       "x-auth-token": token,
@@ -102,13 +104,59 @@ const [isLoading,setIsLoading]=useState(false)
         console.log(err, "An Error Occured");
       });
   }, [isLoading]);
-  const Updatehandler = (e, b) => {
-    console.log(e, b);
-  };
-  const DeleteHandler = (data,id) => {
+  const Updatehandler = (data, id) => {
     setIsLoading(true);
-  
+    console.log("data", data);
     const header = {
+      "x-auth-token": CurrToken,
+      "Content-Type": "application/json",
+    };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to update status",
+      icon: "warning",
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes Update it!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const body = {
+          user_status: data.user_status === 0 ? 1 : 0,
+        };
+        axios
+          .put(
+            `https://5setwalbackend-production.up.railway.app/api/admin/user/${data.d.ID}`,
+            body,
+            {
+              headers: header,
+            }
+          )
+          .then((res) => {
+            if (res.data.success === 1) {
+              Swal.fire("Updated!", "User status has been Updated.", "success");
+              setIsLoading(false);
+            } else {
+              Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: res.data.message,
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err, "An Error Occured");
+          });
+      }
+    });
+  };
+  const DeleteHandler = (data, id) => {
+    setIsLoading(true);
+      const header = {
       "x-auth-token": CurrToken,
       "Content-Type": "application/json",
     };
@@ -121,32 +169,34 @@ const [isLoading,setIsLoading]=useState(false)
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes Delete it!",
-            cancelButtonText: "Cancel",
+      cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-        .delete(`https://5setwalbackend-production.up.railway.app/api/admin/user/${data.ID}`, {
-          headers: header,
-        })
-        .then((res) => {
-          if (res.data.success === 1) {
-            Swal.fire("Deleted!", "Your file has been deleted.", "success");
-            // router(0); 
-            setIsLoading(false)
+          .delete(
+            `https://5setwalbackend-production.up.railway.app/api/admin/user/${data.ID}`,
+            {
+              headers: header,
+            }
+          )
+          .then((res) => {
+            if (res.data.success === 1) {
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              // router(0);
+              setIsLoading(false);
             } else {
-            Swal.fire({
-              position: "top-end",
-              icon: "error",
-              title: res.data.message,
-              showConfirmButton: false,
-              timer: 1500,
-            });
-        
-          }
-        })     
-        .catch((err) => {
-          console.log(err, "An Error Occured");
-        })
+              Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: res.data.message,
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err, "An Error Occured");
+          });
       }
     });
   };
@@ -156,9 +206,7 @@ const [isLoading,setIsLoading]=useState(false)
     <>
       <div className="col-lg-12">
         <div className="aw_table_wrapper_user">
-         
           <div className="table_body">
-       
             <div className="row">
               <div className="col-lg-12 col-md-12 col-sm-12 ">
                 <ThemeProvider theme={defaultMaterialTheme}>
