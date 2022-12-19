@@ -1,12 +1,12 @@
-import React from "react";
 import "./DashboardInfo.css";
-const DashboardInfo = () => {
+
+const DashboardInfo = ({ dashboardReport }) => {
   return (
     <>
       <div className="col-lg-3 col-md-6 col-sm-6">
         <div className="aw_small_box bg-warning">
           <div className="inner">
-            <h3>130</h3>
+            <h3>{dashboardReport?.totalUsers}</h3>
             <p>Total Users</p>
           </div>
           <div className="icon">
@@ -20,8 +20,8 @@ const DashboardInfo = () => {
       <div className="col-lg-3 col-md-6 col-sm-6">
         <div className="aw_small_box bg-info">
           <div className="inner">
-            <h3 className="aw_heading">106</h3>
-            <p className="aw_users">Total Post</p>
+            <h3 className="aw_heading">{dashboardReport?.totalPosts}</h3>
+            <p className="aw_users">Total Posts</p>
           </div>
           <div className="icon">
             <i className="fa-regular fa-image"></i>
@@ -34,7 +34,7 @@ const DashboardInfo = () => {
       <div className="col-lg-3 col-md-6 col-sm-6">
         <div className="aw_small_box bg-danger">
           <div className="inner">
-            <h3 className="aw_heading">7</h3>
+            <h3 className="aw_heading">{dashboardReport?.totalActive}</h3>
             <p className="aw_users">Inactive Users</p>
           </div>
           <div className="icon">
@@ -48,7 +48,7 @@ const DashboardInfo = () => {
       <div className="col-lg-3 col-md-6 col-sm-6">
         <div className="aw_small_box bg-success">
           <div className="inner">
-            <h3 className="aw_heading">123</h3>
+            <h3 className="aw_heading">{dashboardReport?.totalInActive}</h3>
             <p className="aw_users">Active Users</p>
           </div>
           <div className="icon">
