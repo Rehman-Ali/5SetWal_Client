@@ -202,9 +202,9 @@ const UserTable = () => {
     });
   };
   const Viewhandler = (data) => {
-    router(`/user/view/${data.ID}`)
+    router(`/user/view/${data.ID}`);
   };
- 
+
   return (
     <>
       <div className="col-lg-12">
@@ -238,8 +238,7 @@ const UserTable = () => {
                       {
                         icon: () => <VisibilityOutlinedIcon />,
                         tooltip: "View",
-                        onClick: (event, data) =>
-                          Viewhandler(data),
+                        onClick: (event, data) => Viewhandler(data),
                       },
                     ]}
                     options={{

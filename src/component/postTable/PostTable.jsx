@@ -68,12 +68,12 @@ const PostTable = ({ postAllData }) => {
     // { title: "Posts", field: "Posts" },
     {
       title: "Status",
-      field: "user_status",
+      field: "post_status",
         render: (rowData) =>
-          rowData.user_status === 1 ? (
-            <button className="btn btn-info">Active</button>
+          rowData.post_status === "auto-draft" ? (
+            <button className="btn btn-info">{rowData.post_status}</button>
           ) : (
-            <button className="btn btn-danger">Inactive</button>
+            <button className="btn btn-danger">{rowData.post_status}</button>
           ),
     },
     // {
@@ -163,6 +163,62 @@ const PostTable = ({ postAllData }) => {
       }
     });
   };
+
+
+  const Updatehandler = (data, id) => {
+    setIsLoading(true);
+    console.log("data", data);
+    const header = {
+      "x-auth-token": CurrToken,
+      "Content-Type": "application/json",
+    };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to update status",
+      icon: "warning",
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes Update it!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // const body = {
+        //   user_status: data.d.post_status === "auto-draft" ? 0 : 1,
+        // };
+        axios
+          .put(
+            `https://5setwalbackend-production.up.railway.app/api/admin/post/${data.d.ID}`,
+          
+            {
+              headers: header,
+            }
+          )
+          .then((res) => {
+            if (res.data.success === 1) {
+              console.log(res.data,"resp data");
+              Swal.fire("Updated!", "User status has been Updated.", "success");
+              setIsLoading(false);
+            } else {
+              Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: res.data.message,
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err, "An Error Occured");
+          });
+      }
+    });
+  };
+  const Viewhandler = (data) => {
+    navigate(`/post/view/${data.ID}`);
+  };
   useEffect(() => {
     let token = JSON.parse(localStorage.getItem("Token"));
     setToken(JSON.parse(localStorage.getItem("Token")));
@@ -172,12 +228,6 @@ const PostTable = ({ postAllData }) => {
       "Content-Type": "application/json",
     };
   }, [isLoading]);
-
-  const Updatehandler = () => {};
-  const Viewhandler = (data) => {
-    // console.log();
-    navigate(`/post/view/${data.ID}`);
-  };
   return (
     <>
       <div className="col-lg-12">
