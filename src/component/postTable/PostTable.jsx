@@ -1,4 +1,4 @@
-import React, { useRef, forwardRef } from "react";
+import React, { useRef, forwardRef, useEffect } from "react";
 import MaterialTable from "material-table";
 import { useState } from "react";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
@@ -20,6 +20,9 @@ import pika from "../../assets/images/pika.jpg";
 import sale from "../../assets/images/sale.jpg";
 import shop from "../../assets/images/shop1.jpg";
 import shop2 from "../../assets/images/shop2.jpg";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import axios from "axios";
 const tableIcons = {
   Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
   DetailPanel: forwardRef((props, ref) => (
@@ -42,177 +45,194 @@ const tableIcons = {
   SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
 };
-const PostTable = () => {
+const PostTable = ({ postAllData }) => {
+  const navigate = useNavigate();
+  const [CurrToken, setToken] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const tableRef = useRef(null);
   const defaultMaterialTheme = createTheme();
   const columns = [
     {
       title: "ID",
-      field: "id",
+      field: "ID",
     },
-    { title: "Name", field: "title" },
+    { title: "Name", field: "post_title" },
     {
       title: "Email",
-      field: "email",
+      field: "post_status",
     },
     {
-      title: "Image",
-      field: "image",
-      render: (item) => {
-        return (
-          <img
-            src={item.image}
-            alt=""
-            style={{ width: "40px", height: "40px" }}
-          />
-        );
-      },
+      title: "Date",
+      field: "post_date",
     },
-    { title: "Content", field: "content" },
-    { title: "Created At", field: "created" },
-    { title: "Status", field: "status" },
+    // { title: "Posts", field: "Posts" },
     {
-      title: "Action",
-      field: "action",
+      title: "Status",
+      field: "user_status",
+        render: (rowData) =>
+          rowData.user_status === 1 ? (
+            <button className="btn btn-info">Active</button>
+          ) : (
+            <button className="btn btn-danger">Auto Draft</button>
+          ),
     },
+    // {
+    //   title: "Action",
+    //   field: "action",
+    // },
   ];
 
-  const [entries, setEnteries] = useState([
-    {
-      id: 1,
-      title: "test",
-      email: "gallary_name",
-      image: pika,
-      content: "price",
-      created: "created",
-      status: "status",
-      action: "action",
-    },
-    {
-      id: 2,
-      title: "Ghulam Rasool",
-      email: "gh@gmail.com",
-      image: sale,
-      content: "price",
-      created: "created",
-      status: "status",
-      action: "action",
-    },
-    {
-      id: 3,
-      title: "Shoaib",
-      email: "shabi@gmail.com",
-      image: shop,
-      content: "price",
-      created: "created",
-      status: "status",
-      action: "action",
-    },
-    {
-      id: 4,
-      title: "Rehman",
-      email: "rehman@gmail.com",
-      image: shop2,
-      content: "price",
-      created: "created",
-      status: "status",
-      action: "action",
-    },
-    {
-      id: 5,
-      title: "Awais",
-      email: "awais@gmail.com",
-      image: pika,
-      content: "price",
-      created: "created",
-      status: "status",
-      action: "action",
-    },
-    {
-      id: 6,
-      title: "Sheraz ",
-      email: "sheraz@gmail.com",
-      image: shop,
-      content: "price",
-      created: "created",
-      status: "status",
-      action: "action",
-    },
-    {
-      id: 7,
-      title: "Talha ",
-      email: "talha@gmail.com",
-      image: shop2,
-      content: "price",
-      created: "created",
-      status: "status",
-      action: "action",
-    },
-    {
-      id: 7,
-      title: "Ali ",
-      email: "ali@gmail.com",
-      image: sale,
-      content: "price",
-      created: "created",
-      status: "status",
-      action: "action",
-    },
-    {
-      id: 8,
-      title: "Ashfaq Waheed ",
-      email: "ashfaq@gmail.com",
-      image: pika,
-      content: "price",
-      created: "created",
-      status: "status",
-      action: "action",
-    },
-    {
-      id: 9,
-      title: "Shahzad ",
-      email: "shahzad@gmail.com",
-      image: pika,
-      content: "price",
-      created: "created",
-      status: "status",
-      action: "action",
-    },
-  ]);
+  const [entries, setEnteries] = useState(postAllData);
+
+  // const columns = [
+  //   {
+  //     title: "ID",
+  //     field: "ID",
+  //   },
+  //   { title: "Name", field: "post_title" },
+  //   {
+  //     title: "Email",
+  //     field: "email",
+  //   },
+  //   {
+  //     title: "Image",
+  //     field: "image",
+  //     // render: (item) => {
+  //     //   return (
+  //     //     <img
+  //     //       src={item.image}
+  //     //       alt=""
+  //     //       style={{ width: "40px", height: "40px" }}
+  //     //     />
+  //     //   );
+  //     // },
+  //   },
+  //   { title: "Content", field: "post_content" },
+  //   { title: "Created At", field: "post_date" },
+  //   { title: "Status", field: "post_status" },
+  //   {
+  //     title: "Action",
+  //     field: "action",
+  //   },
+  // ];
+
+  // const [entries, setEnteries] = useState([ ]);
+  const DeleteHandler = (data, id) => {
+    setIsLoading(true);
+    const header = {
+      "x-auth-token": CurrToken,
+      "Content-Type": "application/json",
+    };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to delete User",
+      icon: "warning",
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes Delete it!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(
+            `https://5setwalbackend-production.up.railway.app/api/admin/post/${data.ID}`,
+            {
+              headers: header,
+            }
+          )
+          .then((res) => {
+            if (res.data.success === 1) {
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              // router(0);
+              setIsLoading(false);
+            } else {
+              Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: res.data.message,
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err, "An Error Occured");
+          });
+      }
+    });
+  };
+
+
+  const Updatehandler = (data, id) => {
+    setIsLoading(true);
+    console.log("data", data);
+    const header = {
+      "x-auth-token": CurrToken,
+      "Content-Type": "application/json",
+    };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to update status",
+      icon: "warning",
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes Update it!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const body = {
+          user_status: data.user_status === 1 ? 0 : 1,
+        };
+        axios
+          .put(
+            `https://5setwalbackend-production.up.railway.app/api/admin/post/${data.d.ID}`,
+            body,
+            {
+              headers: header,
+            }
+          )
+          .then((res) => {
+            if (res.data.success === 1) {
+              console.log(res.data,"resp data");
+              Swal.fire("Updated!", "User status has been Updated.", "success");
+              setIsLoading(false);
+            } else {
+              Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: res.data.message,
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err, "An Error Occured");
+          });
+      }
+    });
+  };
+  const Viewhandler = (data) => {
+    navigate(`/post/view/${data.ID}`);
+  };
+  useEffect(() => {
+    let token = JSON.parse(localStorage.getItem("Token"));
+    setToken(JSON.parse(localStorage.getItem("Token")));
+
+    const header = {
+      "x-auth-token": token,
+      "Content-Type": "application/json",
+    };
+  }, [isLoading]);
   return (
     <>
       <div className="col-lg-12">
         <div className="aw_table_wrapper_user">
-          {/* <div className="table_userrs">
-            <h3>Latest Users</h3>
-          </div> */}
           <div className="table_body">
-            {/* <div className="row">
-              <div className="col-lg-6 col-md-6 col-sm-12">
-                <div className="dataTables_length">
-                  <label>Show</label>
-                  <select
-                    className="form-select custom_class_select"
-                    aria-label="Default select example"
-                  >
-                    <option defaultValue className="custom_style_option">
-                      10
-                    </option>
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                  </select>
-                  <label>entries</label>
-                </div>
-              </div>
-              <div className="col-lg-6 col-md-6 col-sm-12">
-                <div className="datatable_filter">
-                  <label> Search: </label>
-                  <input className="form-control" />
-                </div>
-              </div>
-            </div> */}
             <div className="row">
               <div className="col-lg-12 col-md-12 col-sm-12 ">
                 <ThemeProvider theme={defaultMaterialTheme}>
@@ -222,6 +242,29 @@ const PostTable = () => {
                     title="Posts "
                     columns={columns}
                     data={entries}
+                    actions={[
+                      {
+                        icon: () => <DeleteIcon />,
+                        tooltip: "Remove",
+                        onClick: (event, data) => DeleteHandler(data),
+                      },
+                      {
+                        icon: () => <Edit />,
+                        tooltip: "Change Status",
+                        onClick: (event, data) =>
+                          Updatehandler({
+                            e: event,
+                            d: data,
+                          }),
+                      },
+
+                      {
+                        icon: () => <VisibilityOutlinedIcon />,
+                        tooltip: "View",
+                        onClick: (event, data) =>
+                          Viewhandler(data),
+                      },
+                    ]}
                     options={{
                       pageSize: 10,
                       pageSizeOptions: [5, 10, 15, 20],

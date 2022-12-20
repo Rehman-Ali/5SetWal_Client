@@ -31,13 +31,13 @@ const Routing = () => {
       <Route path="/posts/:id" element={<Comments />} />
       <Route path="/reports:/id" element={<Reports />} /> */}
 
-      <Route path="/post/view" element={<PostDetailView />} />
-      <Route path="/user/view" element={<UserDetailView />} />
+      <Route path="/post/view/:id" element={<PostDetailView />} />
+      <Route path="/user/view/:id" element={<UserDetailView />} />
 
-      <Route path="/change-password" element={<PasswordChange />} />
-      <Route path="/recyclebin/posts" element={<RecyclePost />} />
-      <Route path="/recyclebin/users" element={<RecycleUser />} />
-      <Route path="/password/reset" element={<PasswordReset />} />
+      <Route path="/change-password" element={<ProtectedRoute Component={PasswordChange} />} />
+      <Route path="/recyclebin/posts" element={<ProtectedRoute Component={RecyclePost} />} />
+      <Route path="/recyclebin/users" element={<ProtectedRoute Component={RecycleUser} />} />
+      <Route path="/password/reset" element={<ProtectedRoute Component={PasswordReset} />} />
     </Routes>
   );
 };

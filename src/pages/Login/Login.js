@@ -47,9 +47,9 @@ const Login = () => {
             user_email: loginCreditional.email,
             user_pass: loginCreditional.password
           }).then((res) => {
-            // console.log("Response :", res.status);
+            console.log("Response :", res);
             setLoggedIn(false)
-            if(res.status === 200) {
+            if(res.data.success === 1) {
               localStorage.setItem("Token", JSON.stringify(res.data.token));
               setLoggedIn(false)
               navigate(0)
