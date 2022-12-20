@@ -68,12 +68,12 @@ const PostTable = ({ postAllData }) => {
     // { title: "Posts", field: "Posts" },
     {
       title: "Status",
-      field: "user_status",
+      field: "post_status",
         render: (rowData) =>
-          rowData.user_status === 1 ? (
-            <button className="btn btn-info">Active</button>
+          rowData.post_status === "auto-draft" ? (
+            <button className="btn btn-info">{rowData.post_status}</button>
           ) : (
-            <button className="btn btn-danger">Auto Draft</button>
+            <button className="btn btn-danger">{rowData.post_status}</button>
           ),
     },
     // {
@@ -184,13 +184,13 @@ const PostTable = ({ postAllData }) => {
       cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
-        const body = {
-          user_status: data.user_status === 1 ? 0 : 1,
-        };
+        // const body = {
+        //   user_status: data.d.post_status === "auto-draft" ? 0 : 1,
+        // };
         axios
           .put(
             `https://5setwalbackend-production.up.railway.app/api/admin/post/${data.d.ID}`,
-            body,
+          
             {
               headers: header,
             }

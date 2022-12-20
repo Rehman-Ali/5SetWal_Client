@@ -14,6 +14,7 @@ import PostDetailView from "../component/postdetialview/PostDetailView";
 import UserDetailView from "../component/userdetailview/UserDetailView";
 import ProtectedRoute from "../ProtectedRoutes/ProtectedRoute";
 import LoginProtected from "../ProtectedRoutes/LoginProtected";
+import RecyclePostView from "../component/recyclePostTable/RecyclePostView";
 
 const Routing = () => {
   return (
@@ -33,6 +34,8 @@ const Routing = () => {
 
       <Route path="/post/view/:id" element={<PostDetailView />} />
       <Route path="/user/view/:id" element={<UserDetailView />} />
+
+      <Route path="/recyclepost/view/:id" element={<RecyclePostView />} />
 
       <Route path="/change-password" element={<ProtectedRoute Component={PasswordChange} />} />
       <Route path="/recyclebin/posts" element={<ProtectedRoute Component={RecyclePost} />} />
