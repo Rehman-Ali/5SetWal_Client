@@ -4,6 +4,7 @@ import BreadCrum from '../../component/breadcrum/BreadCrum'
 import RecyclePostTable from '../../component/recyclePostTable/RecyclePostTable';
 
 const RecyclePost = () => {
+  
   return (
     <>
     <section className='aw_recycle_post'>
