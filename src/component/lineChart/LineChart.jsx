@@ -28,9 +28,7 @@ const LineChartDemo = () => {
       aspectRatio: 0.6,
       plugins: {
         legend: {
-            
-             display:false
-          
+          display: false,
         },
       },
       scales: {
@@ -38,17 +36,17 @@ const LineChartDemo = () => {
           ticks: {
             color: "#495057",
           },
-            grid: {
-            display:false
-            },
+          grid: {
+            display: false,
+          },
         },
         y: {
           ticks: {
             color: "#495057",
           },
-            grid: {
-           display:false
-            },
+          grid: {
+            display: false,
+          },
         },
       },
     };
@@ -60,7 +58,7 @@ const LineChartDemo = () => {
       plugins: {
         legend: {
           labels: {
-              display:false,
+            display: false,
             color: "#495057",
           },
         },
@@ -81,9 +79,9 @@ const LineChartDemo = () => {
           ticks: {
             color: "#495057",
           },
-            grid: {
-             display:false
-            },
+          grid: {
+            display: false,
+          },
         },
         y1: {
           type: "linear",
@@ -92,10 +90,10 @@ const LineChartDemo = () => {
           ticks: {
             color: "#495057",
           },
-            grid: {
-              drawOnChartArea: false,
-              display:false
-            },
+          grid: {
+            drawOnChartArea: false,
+            display: false,
+          },
         },
       },
     };
@@ -126,8 +124,8 @@ const LineChartDemo = () => {
             </p>
           </div>
           <div className="post_lastmonth">
-               <p>Posts</p>
-               <p>Since Last Month</p> 
+            <p>Posts</p>
+            <p>Since Last Month</p>
           </div>
         </div>
         <Chart type="line" data={basicData} options={basicOptions} />

@@ -156,7 +156,7 @@ const UserTable = () => {
   };
   const DeleteHandler = (data, id) => {
     setIsLoading(true);
-      const header = {
+    const header = {
       "x-auth-token": CurrToken,
       "Content-Type": "application/json",
     };
