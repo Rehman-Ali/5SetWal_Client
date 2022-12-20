@@ -12,30 +12,27 @@ const DashboardInfo = () => {
   };
   const dashBoardApi = () => {
     axios
-      .get(
-        `${process.env.REACT_APP_MY_SECRET_KEY}/api/admin/dashboard`,
-        {
-          headers: header,
-        }
-      )
+      .get(`${process.env.REACT_APP_MY_SECRET_KEY}/api/admin/dashboard`, {
+        headers: header,
+      })
       .then((resp) => {
-        console.log("Dashboard Component API :", resp)
+        console.log("Dashboard Component API :", resp);
         if (resp.data.success === 1) {
           setDashboarReport(resp.data.data);
-          setFound(true)
+          setFound(true);
           // console.log("asdfgsdfg", resp)
         }
       })
       .catch((err) => {
         // console.log(err, "An Error Occured");
       });
-  }
+  };
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("Token"));
     setDashToken(token);
-    dashBoardApi()
-  }, [dashToken, found])
-  console.log("Dashboard :", dashboardReport)
+    dashBoardApi();
+  }, [dashToken, found]);
+  console.log("Dashboard :", dashboardReport);
   return (
     <>
       <div className="col-lg-3 col-md-6 col-sm-6">

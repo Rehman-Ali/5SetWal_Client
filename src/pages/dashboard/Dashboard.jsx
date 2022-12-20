@@ -12,7 +12,7 @@ const Dashboard = () => {
   const [dashboardReport, setDashboarReport] = useState({});
   const [dashToken, setDashToken] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const header = {
     "x-auth-token": dashToken,
     "Content-Type": "application/json",
@@ -20,26 +20,22 @@ const Dashboard = () => {
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("Token"));
     setDashToken(token);
-    
+
     axios
-    .get(
-      "https://5setwalbackend-production.up.railway.app/api/admin/dashboard",
-      {
-        headers: header,
-      }
-    )
-    .then((resp) => {
-      if (resp.data.success === 1) {
-        console.log(resp.data);
-        setDashboarReport(resp.data.data);
-      }
-    })
-    
-  
-     
+      .get(
+        "https://5setwalbackend-production.up.railway.app/api/admin/dashboard",
+        {
+          headers: header,
+        }
+      )
+      .then((resp) => {
+        if (resp.data.success === 1) {
+          console.log(resp.data);
+          setDashboarReport(resp.data.data);
+        }
+      });
   }, []);
 
- 
   return (
     <>
       <section className="aw_dashboard">
@@ -48,7 +44,7 @@ const Dashboard = () => {
             <BreadCrum pageName="Dashboard" currentPage="dashboard" />
           </div>
           <div className="row">
-            <DashboardInfo  />
+            <DashboardInfo />
           </div>
           <div className="row">
             <DashBoardChart />
