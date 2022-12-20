@@ -1,7 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./PostDetailView.css";
 import postplaceholder from "../../assets/images/post-user-placehoolder.png";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 const PostDetailView = () => {
+  const { id } = useParams();
+ 
+  const [singleData, setSingleData] = useState({})
+ 
+  useEffect(() => {
+    let token = JSON.parse(localStorage.getItem("Token"));
+    
+
+    const header = {
+      "x-auth-token": token,
+      "Content-Type": "application/json",
+    };
+
+    axios
+      .get(
+        `https://5setwalbackend-production.up.railway.app/api/admin/post/${id}`,
+        {
+          headers: header,
+        }
+      )
+      .then((res) => {
+        setSingleData(res.data.data);
+      });
+  }, []);
   return (
     <section className="PostDetailView">
       <div className="container-fluid">
@@ -60,11 +86,11 @@ const PostDetailView = () => {
                     </tr>
                     <tr>
                       <th>User Name</th>
-                      <td>Jatin Jangra</td>
+                      <td>{singleData?.post_title}</td>
                     </tr>
                     <tr>
                       <th>Post Created At</th>
-                      <td>May 18, 2021</td>
+                      <td>{singleData?.post_date}</td>
                     </tr>
                   </tbody>
                 </table>

@@ -21,6 +21,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { ThemeProvider, createTheme } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
 const tableIcons = {
   Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
   DetailPanel: forwardRef((props, ref) => (
@@ -124,7 +125,7 @@ const UserTable = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         const body = {
-          user_status: data.user_status === 0 ? 1 : 0,
+          user_status: data.d.user_status === 1 ? 0 : 1,
         };
         axios
           .put(
@@ -156,7 +157,7 @@ const UserTable = () => {
   };
   const DeleteHandler = (data, id) => {
     setIsLoading(true);
-      const header = {
+    const header = {
       "x-auth-token": CurrToken,
       "Content-Type": "application/json",
     };
@@ -200,7 +201,9 @@ const UserTable = () => {
       }
     });
   };
-  const Viewhandler = () => {};
+  const Viewhandler = (data) => {
+    router(`/user/view/${data.ID}`);
+  };
 
   return (
     <>
@@ -235,11 +238,7 @@ const UserTable = () => {
                       {
                         icon: () => <VisibilityOutlinedIcon />,
                         tooltip: "View",
-                        onClick: (event, data) =>
-                          Viewhandler({
-                            e: event,
-                            d: data,
-                          }),
+                        onClick: (event, data) => Viewhandler(data),
                       },
                     ]}
                     options={{

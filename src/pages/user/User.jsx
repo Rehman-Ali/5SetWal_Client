@@ -11,7 +11,7 @@ const User = () => {
             <BreadCrum pageName="Users " currentPage="Users" />
           </div>
           <div className="row">
-                <UserTable/>
+            <UserTable />
           </div>
         </div>
       </section>
