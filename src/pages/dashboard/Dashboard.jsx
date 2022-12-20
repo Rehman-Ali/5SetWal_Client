@@ -45,6 +45,7 @@ const Dashboard = () => {
     )
     .then((resp) => {
       if (resp.data.success === 1) {
+        console.log(resp.data);
         setDashboarReport(resp.data.data);
       }
     })
