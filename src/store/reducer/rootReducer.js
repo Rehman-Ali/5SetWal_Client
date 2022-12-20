@@ -6,7 +6,6 @@ const initialState = {
 export const Reducer = (state = initialState, action) => {
   switch (action.type) {
     case TOGGLESIDEBAR:
-      console.log("toggle");
       return {
         ...state,
         ToggleSidebar: !state.ToggleSidebar,
