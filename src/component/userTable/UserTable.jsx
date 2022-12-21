@@ -99,7 +99,6 @@ const UserTable = () => {
       })
       .then((resp) => {
         setEnteries(resp.data.data);
-        console.log(" =>", resp.data);
       })
       .catch((err) => {
         console.log(err, "An Error Occured");

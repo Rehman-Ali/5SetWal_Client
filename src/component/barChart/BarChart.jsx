@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import { Chart } from "primereact/chart";
 import "./BarChart.css";
-const BarChart = () => {
+const BarChart = ( {montlyUser, totalUsers}) => {
+
+  console.log(montlyUser, 'bar chat montly')
   const [basicData] = useState({
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: ["JAN", "FEB", "MAR", "APR", "MAY","JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
+
     datasets: [
       {
         label: "My First dataset",
         backgroundColor: "#42A5F5",
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data:montlyUser,
+        fill: true,
+
       },
-      {
-        label: "My Second dataset",
-        backgroundColor: "#FFA726",
-        data: [28, 48, 40, 19, 86, 27, 90],
-      },
+      // {
+      //   label: "My Second dataset",
+      //   backgroundColor: "#FFA726",
+      //   data: [28, 48, 40, 19, 86, 27, 90],
+      // },
     ],
   });
 
@@ -62,7 +67,7 @@ const BarChart = () => {
           </div>
           <div className="total_posts">
             <div className="total_ d-flex justify-content-between">
-              <h6>18</h6>
+              <h6>{totalUsers}</h6>
               <p>
                 <span>
                   <i className="fa-solid fa-arrow-up"></i>
