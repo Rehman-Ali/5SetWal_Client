@@ -12,6 +12,8 @@ const Dashboard = () => {
   const [dashboardReport, setDashboarReport] = useState({});
   const [dashToken, setDashToken] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [totalUsers, setTotalUsers] = useState("");
+  const [totalPosts, setTotalPost] = useState("");
 
   const header = {
     "x-auth-token": dashToken,
@@ -25,13 +27,19 @@ const Dashboard = () => {
       .get(
         "https://5setwalbackend-production.up.railway.app/api/admin/dashboard",
         {
-          headers: header,
+          headers: {
+            "x-auth-token": token,
+            "Content-Type": "application/json",
+          },
         }
       )
       .then((resp) => {
         if (resp.data.success === 1) {
-          console.log(resp.data);
+          console.log(resp.data.data);
           setDashboarReport(resp.data.data);
+          setTotalPost(resp.data.data.totalPosts);
+          setTotalUsers(resp.data.data.totalUsers);
+          setIsLoading(true);
         }
       });
   }, []);
@@ -44,14 +52,14 @@ const Dashboard = () => {
             <BreadCrum pageName="Dashboard" currentPage="dashboard" />
           </div>
           <div className="row">
-            <DashboardInfo />
+            <DashboardInfo dashboardReport={dashboardReport} />
           </div>
           <div className="row">
-            <DashBoardChart />
+            <DashBoardChart totalUsers={totalUsers} totalPosts={totalPosts}/>
           </div>
           <div className="row">
             {/* <DashBoardTable /> */}
-            <UserTable />
+            <UserTable  />
           </div>
         </div>
       </section>

@@ -1,24 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Chart } from "primereact/chart";
 import "./LineChart.css";
-const LineChartDemo = () => {
+import axios from "axios";
+const LineChartDemo = ( {montlyPost, totalPosts}) => {
+
+  console.log('montlyPost', totalPosts)
   const [basicData] = useState({
-    labels: ["JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
+    labels: ["JAN", "FEB", "MAR", "APR", "MAY","JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
     datasets: [
       {
         label: "Posts",
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data: montlyPost,
         fill: false,
         borderColor: "#42A5F5",
-        tension: 0.4,
+        // tension: 0.4,
       },
-      {
-        label: "Second Dataset",
-        data: [28, 48, 40, 19, 86, 27, 90],
-        fill: false,
-        borderColor: "#FFA726",
-        tension: 0.4,
-      },
+      // {
+      //   label: "Second Dataset",
+      //   data: [28, 48, 40, 19, 86, 27, 90],
+      //   fill: false,
+      //   borderColor: "#FFA726",
+      //   tension: 0.4,
+      // },
     ],
   });
 
@@ -106,6 +109,7 @@ const LineChartDemo = () => {
 
   const { basicOptions, multiAxisOptions } = getLightTheme();
 
+
   return (
     <div className="aw_line_chart_wrap">
       <div className="card">
@@ -115,7 +119,7 @@ const LineChartDemo = () => {
         </div>
         <div className="total_posts">
           <div className="total_ d-flex justify-content-between">
-            <h6>850</h6>
+            <h6>{totalPosts}</h6>
             <p>
               <span>
                 <i className="fa-solid fa-arrow-up"></i>
@@ -134,10 +138,10 @@ const LineChartDemo = () => {
             <span></span>
             <p>This Month</p>
           </div>
-          <div className="last_month">
+          {/* <div className="last_month">
             <span></span>
             <p>Last Month</p>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

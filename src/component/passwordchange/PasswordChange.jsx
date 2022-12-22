@@ -2,7 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./PasswordChange.css";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 const PasswordChange = () => {
+  const navigate = useNavigate();
   const [_token, setToken] = useState("");
   const [passwordList, setPasswordList] = useState({
     oldpassword: "",
@@ -44,6 +46,7 @@ const PasswordChange = () => {
               showConfirmButton: false,
               timer: 1500,
             });
+            navigate("/dashboard");
           }
         })
         .catch((err) => {
@@ -88,7 +91,7 @@ const PasswordChange = () => {
                   <div className="form-group">
                     <label htmlFor="">Old Password</label>
                     <input
-                      type="text"
+                      type="password"
                       placeholder="Enter old password"
                       name="oldpassword"
                       className="form-control"
@@ -99,7 +102,7 @@ const PasswordChange = () => {
                   <div className="form-group">
                     <label htmlFor="">New Password</label>
                     <input
-                      type="text"
+                      type="password"
                       placeholder="Enter new password"
                       name="newpassword"
                       className="form-control"
