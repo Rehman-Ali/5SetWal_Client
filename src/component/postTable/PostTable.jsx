@@ -45,8 +45,9 @@ const tableIcons = {
   SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
 };
-const PostTable = ({ postAllData }) => {
+const PostTable = () => {
   const navigate = useNavigate();
+
   const [CurrToken, setToken] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const tableRef = useRef(null);
@@ -82,43 +83,9 @@ const PostTable = ({ postAllData }) => {
     // },
   ];
 
-  const [entries, setEnteries] = useState(postAllData);
+  const [entries, setEnteries] = useState();
 
-  // const columns = [
-  //   {
-  //     title: "ID",
-  //     field: "ID",
-  //   },
-  //   { title: "Name", field: "post_title" },
-  //   {
-  //     title: "Email",
-  //     field: "email",
-  //   },
-  //   {
-  //     title: "Image",
-  //     field: "image",
-  //     // render: (item) => {
-  //     //   return (
-  //     //     <img
-  //     //       src={item.image}
-  //     //       alt=""
-  //     //       style={{ width: "40px", height: "40px" }}
-  //     //     />
-  //     //   );
-  //     // },
-  //   },
-  //   { title: "Content", field: "post_content" },
-  //   { title: "Created At", field: "post_date" },
-  //   { title: "Status", field: "post_status" },
-  //   {
-  //     title: "Action",
-  //     field: "action",
-  //   },
-  // ];
-
-  // const [entries, setEnteries] = useState([ ]);
   const DeleteHandler = (data, id) => {
-    setIsLoading(true);
     const header = {
       "x-auth-token": CurrToken,
       "Content-Type": "application/json",
@@ -143,10 +110,10 @@ const PostTable = ({ postAllData }) => {
             }
           )
           .then((res) => {
+            setIsLoading(true);
             if (res.data.success === 1) {
               Swal.fire("Deleted!", "Your file has been deleted.", "success");
               // router(0);
-              setIsLoading(false);
             } else {
               Swal.fire({
                 position: "top-end",
@@ -162,6 +129,8 @@ const PostTable = ({ postAllData }) => {
           });
       }
     });
+    
+
   };
 
 
@@ -220,6 +189,7 @@ const PostTable = ({ postAllData }) => {
     navigate(`/post/view/${data.ID}`);
   };
   useEffect(() => {
+    
     let token = JSON.parse(localStorage.getItem("Token"));
     setToken(JSON.parse(localStorage.getItem("Token")));
 
@@ -227,6 +197,21 @@ const PostTable = ({ postAllData }) => {
       "x-auth-token": token,
       "Content-Type": "application/json",
     };
+
+    axios
+      .get("https://5setwalbackend-production.up.railway.app/api/admin/post", {
+        headers: { "x-auth-token": token, "Content-Type": "application/json" },
+      })
+      .then((resp) => {
+        if (resp.data.success === 1) {
+          setEnteries(resp.data.data);
+       
+        }
+      }).catch((err)=>{
+        console.log(err);
+      })
+
+
   }, [isLoading]);
   return (
     <>
